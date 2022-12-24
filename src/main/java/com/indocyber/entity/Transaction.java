@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "TransactionTroll")
-public class TransactionTroll {
+public class Transaction {
 
     @Id
     @Column(name = "Id")
@@ -37,9 +37,9 @@ public class TransactionTroll {
     @JoinColumn(name = "BuyerUsername")
     private Account buyer;
 
-    public TransactionTroll() {}
+    public Transaction() {}
 
-    public TransactionTroll(LocalDate purchaseDate, Merchandise merchandise, String merchandiseName, int quantity, Shipment shipment, BigDecimal totalPrice, Account buyer) {
+    public Transaction(LocalDate purchaseDate, Merchandise merchandise, String merchandiseName, int quantity, Shipment shipment, BigDecimal totalPrice, Account buyer) {
         this.purchaseDate = purchaseDate;
         this.merchandise = merchandise;
         this.merchandiseName = merchandiseName;
