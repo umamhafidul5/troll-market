@@ -15,7 +15,6 @@ public class Cart {
     @JoinColumn(name = "BuyerUsername")
     private Account buyer;
 
-
     @ManyToMany
     @JoinTable(
             name = "Cart_Merchandise",
