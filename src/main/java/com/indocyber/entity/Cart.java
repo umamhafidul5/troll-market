@@ -17,13 +17,11 @@ public class Cart {
 
 
     @ManyToMany
-    @JoinTable(name = "Cart_Merchandise",
-            joinColumns = @JoinColumn(
-                    name = "CartId", referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "MerchandiseId", referencedColumnName = "id"
-            ))
+    @JoinTable(
+            name = "Cart_Merchandise",
+            joinColumns = @JoinColumn(name = "CartId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "MerchandiseId", referencedColumnName = "id")
+    )
     private List<Merchandise> merchandise;
 
     public Cart () {}
