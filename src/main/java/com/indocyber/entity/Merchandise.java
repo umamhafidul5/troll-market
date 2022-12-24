@@ -12,7 +12,7 @@ public class Merchandise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "SellerUsername")
     private Account seller;
 

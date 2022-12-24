@@ -6,14 +6,15 @@ import java.util.List;
 @Entity
 @Table(name = "Cart")
 public class Cart {
+
     @Id
     @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
     @JoinColumn(name = "BuyerUsername")
     private Account buyer;
+
 
     @ManyToMany
     @JoinTable(
@@ -21,13 +22,13 @@ public class Cart {
             joinColumns = @JoinColumn(name = "CartId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "MerchandiseId", referencedColumnName = "id")
     )
-    private List<Merchandise> merchandiseList;
+    private List<Merchandise> merchandise;
 
-    public Cart() {}
+    public Cart () {}
 
-    public Cart(Account buyer, List<Merchandise> merchandiseList) {
+    public Cart(Account buyer, List<Merchandise> merchandise) {
         this.buyer = buyer;
-        this.merchandiseList = merchandiseList;
+        this.merchandise = merchandise;
     }
 
     public int getId() {
@@ -46,15 +47,15 @@ public class Cart {
         this.buyer = buyer;
     }
 
-    public List<Merchandise> getMerchandiseList() {
-        return merchandiseList;
+    public List<Merchandise> getMerchandise() {
+        return merchandise;
     }
 
     public void addMerchandise(Merchandise merchandise) {
-        this.merchandiseList.add(merchandise);
+        this.merchandise.add(merchandise);
     }
 
-    public void setMerchandiseList(List<Merchandise> merchandiseList) {
-        this.merchandiseList = merchandiseList;
+    public void setMerchandise(List<Merchandise> merchandise) {
+        this.merchandise = merchandise;
     }
 }
