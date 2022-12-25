@@ -1,4 +1,4 @@
-package com.indocyber.controller;
+package com.indocyber.controller.mvc;
 
 public class MerchandiseController {
 }
