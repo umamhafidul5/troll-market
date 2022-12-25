@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <div>Troll Market</div>
+        </div>
+        <div>
+            <form action="#" th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" />
+            </form>
+        </div>
+    </div>
+    <div class="menu">
+        <a class="btnHeader" th:href="${'/home/index'}">Home</a>
+        <a class="btnHeader" th:href="${'/profile/index'}">Profilr</a>
+        <a class="btnHeader" th:href="${'/shop/index'}">Shop</a>
+        <a class="btnHeader" th:href="${'/merchandise/index'}">Merchandise</a>
+        <a class="btnHeader" th:href="${'/shipment/index'}">Shipment</a>
+        <a class="btnHeader" th:href="${'/myCart/index'}">My Cart</a>
+        <a class="btnHeader" th:href="${'/admin/index'}">Admin</a>
+        <a class="btnHeader" th:href="${'/history/index'}">History</a>
+    </div>
+    <div class="title">
+        <h3>Home</h3>
+    </div>
+    <div class="main">
+        <h3>Selamat Datang di Troll Market</h3>
+        <p>Ini adalah market place yang tidak pernah ada promosi dan diskon</p>
+        <p>Karena ini hanya assignment buat kalian, jadi buat apa ada diskon</p>
+    </div>
+</div>
+</body>
+</html>
