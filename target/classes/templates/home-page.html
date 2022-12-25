@@ -1,39 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Troll Market</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div>
-            <div>Troll Market</div>
-        </div>
-        <div>
-            <form action="#" th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out" />
-            </form>
-        </div>
-    </div>
-    <div class="menu">
-        <a class="btnHeader" th:href="${'/home/index'}">Home</a>
-        <a class="btnHeader" th:href="${'/profile/index'}">Profilr</a>
-        <a class="btnHeader" th:href="${'/shop/index'}">Shop</a>
-        <a class="btnHeader" th:href="${'/merchandise/index'}">Merchandise</a>
-        <a class="btnHeader" th:href="${'/shipment/index'}">Shipment</a>
-        <a class="btnHeader" th:href="${'/myCart/index'}">My Cart</a>
-        <a class="btnHeader" th:href="${'/admin/index'}">Admin</a>
-        <a class="btnHeader" th:href="${'/history/index'}">History</a>
-    </div>
-    <div class="title">
-        <h3>Home</h3>
-    </div>
     <div class="main">
-        <h3>Selamat Datang di Troll Market</h3>
-        <p>Ini adalah market place yang tidak pernah ada promosi dan diskon</p>
-        <p>Karena ini hanya assignment buat kalian, jadi buat apa ada diskon</p>
+        <header th:fragment="header">
+            <div>
+                <div>Troll Market</div>
+            </div>
+            <div>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out" />
+                </form>
+            </div>
+        </header>
+
+        <nav th:fragment="nav">
+            <a th:href="${'/home/index'}">
+                <input type="button" value="Home">
+            </a>
+            <a th:href="${'/profile/index'}">
+                <input type="button" value="Profile">
+            </a>
+            <a th:href="${'/shop/index'}">
+                <input type="button" value="Shop">
+            </a>
+            <a th:href="${'/merchandise/index'}">
+                <input type="button" value="Merchandise">
+            </a>
+            <a th:href="${'/shipment/index'}">
+                <input type="button" value="Shipment">
+            </a>
+            <a th:href="${'/myCart/index'}">
+                <input type="button" value="My Cart">
+            </a>
+            <a th:href="${'/admin/index'}">
+                <input type="button" value="Admin">
+            </a>
+            <a th:href="${'/history/index'}">
+                <input type="button" value="History">
+            </a>
+        </nav>
+
+        <div class="top">
+            <span>Home</span>
+        </div>
+        <main>
+            <h3>Selamat Datang di Troll Market</h3>
+            <p>Ini adalah market place yang tidak pernah ada promosi dan diskon</p>
+            <p>Karena ini hanya assignment buat kalian, jadi buat apa ada diskon</p>
+        </main>
     </div>
-</div>
 </body>
 </html>

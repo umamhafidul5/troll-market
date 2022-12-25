@@ -1,56 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Login-Page</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home-page :: head}">
 </head>
 <body>
-<div class="container">
-    <h2>Troll-Market</h2>
-
-    <form class="form-register" th:action="@{/authenticateTheUser}" method="post">
-        <!-- Check for login error -->
-        <div th:if="${param.error}" class="error">
-            Invalid username, Password or Role
+    <div class="container">
+        <div class="title">
+            <h2>Troll-Market</h2>
         </div>
 
-        <!-- Check for logout -->
-        <div th:if="${param.logout}">
-            You have been logged out.
+        <div class="wrapper">
+            <!-- Check for login error -->
+            <div th:if="${param.error}" class="error">
+                Invalid username, Password or Role
+            </div>
+
+            <!-- Check for logout -->
+            <div th:if="${param.logout}" class="error">
+                You have been logged out.
+            </div>
+
+            <div class="binder">
+                <form class="form-register" th:action="@{/authenticateTheUser}" method="post">
+
+                    <!-- User name -->
+                    <div class="input-data">
+                        <span>Username</span>
+                        <input type="text" name="username" placeholder="username" />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-data">
+                        <span>Password</span>
+                        <input type="password" name="password" placeholder="password" />
+                    </div>
+
+                    <div class="input-data">
+                        <span>Login As</span>
+                        <select name="role">
+                            <option th:value=null>Select</option>
+                            <option th:each="option : ${roleDropdown}" th:value="${option.stringValue}"
+                                    th:text="${option.text}" th:selected="${option.stringValue == role}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Login/Submit button -->
+                    <div class="input-data">
+                        <button class="btn" type="submit">Login</button>
+                        <button class="btn">
+                            <a th:href="@{/account/registerBuyer}">Register as Buyer</a>
+                        </button>
+                        <button class="btn">
+                            <a th:href="@{/account/registerSeller}">Register as Seller</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
 
-        <!-- User name -->
-        <div>
-            <span>Username</span>
-            <input type="text" name="username" placeholder="username" />
-        </div>
-
-        <!-- Password -->
-        <div>
-            <span>Password</span>
-            <input type="password" name="password" placeholder="password" />
-        </div>
-
-        <div>
-            <span>Login As</span>
-            <select name="role">
-                <option th:value=null>Select</option>
-                <option th:each="option : ${roleDropdown}" th:value="${option.stringValue}"
-                        th:text="${option.text}" th:selected="${option.stringValue == role}"></option>
-            </select>
-        </div>
-
-        <!-- Login/Submit button -->
-        <div>
-            <button class="btn" type="submit">Login</button>
-            <button class="btn">
-                <a th:href="@{/account/registerBuyer}">Register as Buyer</a>
-            </button>
-            <button class="btn">
-                <a th:href="@{/account/registerSeller}">Register as Seller</a>
-            </button>
-        </div>
-    </form>
-</div>
+    </div>
 </body>
 </html>

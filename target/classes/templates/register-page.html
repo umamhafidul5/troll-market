@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Register-Page</title>
+<head th:replace="~{home-page :: head}">
 </head>
 <body>
-<div class="containerForm">
-    <h2>Sign Up</h2>
-    <form class="form-register"
-          method="post"
-          th:attr="action=@{/account/registerAccount}"
-          th:object="${account}">
+    <div class="main">
+        <div class="container-s">
+            <div class="wrapper none">
+                <form class="form-register"
+                      method="post"
+                      th:attr="action=@{/account/registerAccount}"
+                      th:object="${account}">
 
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-        <div th:errors="*{username}"></div>
-        <input type="text" th:field="*{username}" placeholder="Username" />
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{username}"></div>
+                        <label>Username</label>
+                        <input type="text" th:field="*{username}" placeholder="Username" />
+                    </div>
 
-        <div th:errors="*{password}"></div>
-        <input type="password" th:field="*{password}" placeholder="Password" />
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{password}"></div>
+                        <label>Password</label>
+                        <input type="password" th:field="*{password}" placeholder="Password" />
+                    </div>
 
-        <div th:errors="*{passwordConfirmation}"></div>
-        <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
 
-        <div th:errors="*{role}"></div>
-        <input type="hidden" th:field="*{role}" placeholder="Role" />
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{passwordConfirmation}"></div>
+                        <label>Confirm Password</label>
+                        <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
+                    </div>
 
-        <div th:errors="*{firstName}"></div>
-        <input type="text" th:field="*{firstName}" placeholder="First Name" />
 
-        <div th:errors="*{lastName}"></div>
-        <input type="text" th:field="*{lastName}" placeholder="Last Name" />
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{role}"></div>
+                        <label>Role</label>
+                        <input type="hidden" th:field="*{role}" placeholder="Role" />
+                    </div>
 
-        <div th:errors="*{address}"></div>
-        <textarea th:field="*{address}" placeholder="Address"></textarea>
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{firstName}"></div>
+                        <label>Firstname</label>
+                        <input type="text" th:field="*{firstName}" placeholder="First Name" />
+                    </div>
 
-        <button type="submit">Register</button>
+                    <div class="input-data">
+                        <div class="error-input" th:errors="*{lastName}"></div>
+                        <label>Lastname</label>
+                        <input type="text" th:field="*{lastName}" placeholder="Last Name" />
+                    </div>
 
-    </form>
+                    <div class="input-data">
+                        <div th:errors="*{address}"></div>
+                        <label>Address</label>
+                        <textarea th:field="*{address}" placeholder="Address"></textarea>
+                    </div>
 
-    <button class="btn btn-success">
-        <a th:href="@{/my-login/showMyLoginPage}">Back to login page</a>
-    </button>
-</div>
+                    <div class="center">
+                        <input type="submit" value="Register"/>
+                        <a th:href="@{/my-login/showMyLoginPage}">
+                            <input type="button" value="Back to login page">
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
 </body>
 </html>
