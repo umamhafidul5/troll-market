@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin-Page</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+    <div class="main">
+        <header th:replace="home-page :: header"></header>
+        <nav th:replace="home-page :: nav"></nav>
+        <div class="top">
+            <span>Admin</span>
+        </div>
+        <main>
+            <form class="form-register"
+                  method="post"
+                  th:attr="action=@{/admin/registerAdmin}"
+                  th:object="${account}">
+
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <div class="input-data">
+                    <div class="error-input" th:errors="*{username}"></div>
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}" placeholder="Username" />
+                </div>
+
+                <div class="input-data">
+                    <div class="error-input" th:errors="*{password}"></div>
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" placeholder="Password" />
+                </div>
+
+
+                <div class="input-data">
+                    <div class="error-input" th:errors="${account}"></div>
+                    <div class="error-input" th:errors="*{passwordConfirmation}"></div>
+                    <label>Confirm Password</label>
+                    <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
+                </div>
+
+
+                <div class="input-data">
+                    <div class="error-input" th:errors="*{role}"></div>
+                    <input type="hidden" th:field="*{role}" placeholder="Role" />
+                </div>
+
+                <div class="center">
+                    <input type="submit" value="Save New Admin"/>
+                </div>
+
+            </form>
+        </main>
+
+    </div>
 
 </body>
 </html>
