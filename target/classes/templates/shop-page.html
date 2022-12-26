@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home-page :: head}">
 </head>
 <body>
+    <div class="main">
+        <header th:replace="~{home-page :: header}"></header>
+        <nav th:replace="~{home-page :: nav}"></nav>
+
+        <div class="top">
+            <span>Shop</span>
+        </div>
+
+        <div class="border">
+            <form th:action="@{/shop/index}" method="get">
+                <div class="input-data left">
+                    <label class="column2">Name</label>
+                    <input th:value="${param.name}"
+                           name="name" type="search"
+                           placeholder="Find by Name">
+                </div>
+
+                <div class="input-data left">
+                    <label class="column2">Category</label>
+                    <input th:value="${param.category}"
+                           name="category" type="search"
+                           placeholder="Find by Category">
+                </div>
+
+                <div class="input-data left">
+                    <label class="column2">Description</label>
+                    <input th:value="${param.description}"
+                           name="description" type="search"
+                           placeholder="Find by Description">
+                </div>
+
+                <div class="input-data">
+                    <input type="submit" value="Search">
+                </div>
+            </form>
+        </div>
+
+        <div class="border">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bottom-border-none left-border-none top-border-none no-background-color"></th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:unless="${merchandiseList.size() > 0}"
+                    th:each="d : ${merchandiseList}">
+                    <td class="bottom-border-none left-border-none top-border-none no-background-color">
+                        <a th:href="@{/}">
+                            <input type="button" value="Add to Cart">
+                        </a>
+
+                        <a th:href="@{/}">
+                            <input type="button" value="Detail Info">
+                        </a>
+                    </td>
+                    <td th:text="${d.name}"></td>
+                    <td th:text="${'Rp ' + #numbers.formatDecimal(d.price, 3, 'POINT', 0, 'COMMA')}"></td>
+                </tr>
+                <tr th:unless="${merchandiseList.size() > 0}">
+                    <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>
+                    <td class="no-data-found" th:colspan="2">No Data Found</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </body>
 </html>
