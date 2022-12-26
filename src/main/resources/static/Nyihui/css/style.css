@@ -1,0 +1,413 @@
+@font-face {
+    font-family: Ubuntu;
+    src: url(../Nyihui/font/Ubuntu-Regular.ttf);
+}
+
+@font-face {
+    font-family: Courgette;
+    src: url(../Nyihui/font/Courgette-Regular.ttf);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    /* background-image: linear-gradient(to top left, #F44336, #E91E63, #9C27B0, #673AB7, #3F51B5); */
+    background-image: linear-gradient(to top left, #0D47A1, #1B5E20, #F57F17);
+    background-attachment: fixed;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Ubuntu;
+}
+
+.access-denied {
+    background-image: linear-gradient(to bottom right, #B71C1C, #B71C1C, #4A148C);
+    background-attachment: fixed;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: Ubuntu;
+}
+
+.body-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #212121;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #F5F5F580;
+    box-shadow: 0 0 15px #212121;
+}
+
+.error {
+    color: #FF1744;
+    margin-left: 230px;
+    font-size: 12px;
+}
+
+
+label > label {
+    color: #FF1744;
+}
+
+.input-form {
+    display: flex;
+    justify-content: space-between;
+    padding: 7.5px 10px;
+    align-items: center;
+}
+
+
+.left-side > div:first-child {
+    margin-top: 10px;
+}
+
+.left-side > div:last-child {
+    margin-bottom: 10px;
+}
+
+.input-form > input, .input-form > select {
+    width: 210px;
+    height: 30px;
+    font-size: 13px;
+    border: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #F5F5F580;
+    box-shadow: 0 0 3px #424242;
+}
+
+.input-form > input:focus {
+    outline: none;
+}
+
+.input-form > label {
+    font-size: 15px;
+}
+
+.input-form > textarea {
+    width: 210px;
+    font-family: Ubuntu;
+    font-size: 13px;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    resize: none;
+    background-color: #F5F5F580;
+    outline: none;
+    box-shadow: 0 0 3px #424242;
+}
+
+.unexpected {
+    margin-left: 0;
+    margin-bottom: 10px;
+    font-size: 15px;
+
+}
+
+.form-button {
+    width: 100%;
+    text-align: center;
+    margin: 7.5px 0;
+}
+
+.form-button > button {
+    width: 215px;
+    height: 35px;
+    color: #F5F5F5;
+    background-color: #2196F3;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0 0 3px #424242;
+}
+
+.form-button > button:hover {
+    cursor: pointer;
+    background-color: #1976D2;
+}
+
+.form-button > button:disabled {
+    background-color: #64B5F6;
+    cursor: not-allowed;
+}
+
+.show-password {
+    padding: 0 7.5px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.sign-in-link {
+    font-size: 15px;
+    text-align: center;
+}
+
+span > a {
+    text-decoration: none;
+    color: #01579B;
+}
+
+span > a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin: 10px;
+}
+
+#logo {
+    height: 200px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+
+#logo-text {
+    font-family: Courgette;
+    font-size: 28px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+#forbidden-logo {
+    height: 200px;
+    margin: 20px auto;
+}
+
+#forbidden-logo-text {
+    font-family: Ubuntu;
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0 auto;
+}
+
+#forbidden-logo-time {
+    font-family: Ubuntu;
+    font-size: 15px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.top-info-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 60px;
+    margin: 20px auto;
+}
+
+.text-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#vip-status {
+    color: #F5F5F5;
+    background-color: #212121;
+    width: 50px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 5px;
+    margin-right: 100px;
+}
+
+.top-info > .text-info {
+    margin-left: 20px;
+}
+
+.top-info button {
+    margin-right: 20px;
+}
+
+
+.log-out-button {
+    width: 200px;
+    height: 30px;
+    color: #F5F5F5;
+    background-color: #212121;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 3px #424242;
+}
+
+.log-out-button:hover {
+    cursor: pointer;
+    background-color: #424242;
+}
+
+.success {
+    color: #0D47A1;
+}
+
+.top-menu-container {
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    background-color: #F5F5F580;
+    box-shadow: 0 0 15px #212121;
+    border-radius: 10px;
+}
+
+.top-menu-container > a {
+    color: #212121;
+}
+
+.top-menu-container > a:first-child {
+    margin-left: 25px;
+}
+
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    background-color: #F5F5F5;
+    border-radius: 40px;
+    box-shadow: 0 0 5px #212121;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avatar-logo {
+    width: 40px;
+}
+
+.table-info {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    color: #F5F5F5;
+}
+
+.add-new-button {
+    color: #212121;
+    background-color: #F5F5F5;
+    box-shadow: 0 0 15px #212121;
+}
+
+.add-new-button:hover {
+    background-color: #E0E0E0;
+}
+
+.table-list {
+    width: 90%;
+    /* background-color: #F5F5F580; */
+    box-shadow: 0 0 15px #212121;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    border-spacing: 0;
+    text-align: center;
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+
+.table-list > thead {
+    height: 50px;
+    color: #F5F5F5;
+    background-color: #61616180;
+}
+
+.table-list > thead th:first-child, .table-list > thead th:last-child {
+    width: 25%;
+}
+
+.table-list > tbody > tr {
+    height: 40px;
+    color: #212121;
+}
+
+.table-list > tbody > tr:nth-child(even) {
+    background-color: #BDBDBD80;
+}
+
+.table-list > tbody >tr:nth-child(odd) {
+    background-color: #EEEEEE80;
+}
+
+.button-table {
+    width: 80px;
+    height: 25px;
+    color: #F5F5F5;
+    background-color: #212121;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 3px #424242;
+}
+
+.button-table:hover {
+    cursor: pointer;
+    background-color: #424242;
+}
+
+.page-group {
+    position: absolute;
+    right: 5%;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    justify-content: space-evenly;
+    box-shadow: 0 0 15px #212121;
+    border-radius: 50px;
+}
+
+.page-group > a {
+    text-decoration: none;
+    color: #212121;
+}
+
+.page-group div {
+    background-color: #F5F5F580;
+    padding: 10px 15px;
+}
+
+.page-group > a:first-child > div, .page-group > span:first-child > div {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.page-group > a:last-child > div, .page-group > span:last-child > div {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.current-page {
+    color: #B71C1C;
+}
