@@ -22,4 +22,9 @@ public class MerchandiseServiceImpl implements MerchandiseService {
     public List<Merchandise> getAllMerchandiseBy(String name, String category, String description) {
         return merchandiseRepository.getMerchandisesByNameOrCategoryOrDescription(name, category, description);
     }
+
+    @Override
+    public List<Merchandise> getAllMerchandise() {
+        return merchandiseRepository.findAll();
+    }
 }
