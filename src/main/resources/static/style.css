@@ -152,7 +152,7 @@ header > h3 {
     border-radius: 5px;
 }
 
-main {
+main, .border {
     margin: 10px 0;
     padding: 10px 20px;
     border: solid 2px black;
@@ -200,46 +200,6 @@ td > a {
 
 tbody tr:nth-child(odd) {
     background-color: #E6E6E6;
-}
-
-.admin-table th,
-.admin-table td {
-    width: 25%;
-}
-
-.admin-table th:first-child,
-.admin-table td:first-child {
-    width: 30%;
-}
-
-.admin-table th:last-child,
-.admin-table td:last-child {
-    width: 20%;
-}
-
-.customer-table th,
-.customer-table td {
-    width: 5%;
-}
-
-.customer-table th:first-child,
-.customer-table td:first-child {
-    width: 5%;
-}
-
-.customer-table th:last-child,
-.customer-table td:last-child {
-    width: 25%;
-}
-
-.customer-table th:nth-child(2),
-.customer-table td:nth-child(2) {
-    width: 20%;
-}
-
-.customer-table th:nth-last-child(3),
-.customer-table td:nth-last-child(3) {
-    width: 15%;
 }
 
 .container-s {
@@ -413,14 +373,17 @@ input[type='submit']{
 }
 
 .column1 {
+    display: block;
     width: 10px;
 }
 
 .column2 {
+    display: block;
     width: 100px;
 }
 
 .column3 {
+    display: block;
     width: 300px;
 }
 
@@ -442,4 +405,8 @@ input[type='submit']{
 
 .right-pad {
     padding-right: 80px;
+}
+
+.half-width {
+    width: 50%;
 }
