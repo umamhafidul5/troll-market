@@ -16,10 +16,10 @@ public class MvcSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
-                .antMatchers("/css/**", "/account/**").permitAll()
+                .antMatchers("/style.css", "/account/**").permitAll()
 //                .antMatchers("/account/**", "/api/**").permitAll()
 //                .antMatchers("/**").hasAuthority("Super_Admin")
-                .antMatchers("/**").permitAll()
+//                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/my-login/showMyLoginPage")
