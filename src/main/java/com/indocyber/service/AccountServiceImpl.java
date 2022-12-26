@@ -6,6 +6,8 @@ import com.indocyber.repository.AccountRepository;
 import com.indocyber.security.ApplicationUserDetails;
 import com.indocyber.security.MvcSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -76,6 +78,14 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         }
 
         return tempAccount.getRole();
+    }
+
+    @Override
+    public Account getAccount() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Account> byId = this.accountRepository.findById(authentication.getName());
+        return byId.orElseThrow();
     }
 
     @Override
