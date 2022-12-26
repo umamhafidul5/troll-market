@@ -1,5 +1,6 @@
 package com.indocyber.service;
 
+import com.indocyber.dto.RegisterAdminDto;
 import com.indocyber.dto.RegisterDto;
 import com.indocyber.entity.Account;
 import com.indocyber.repository.AccountRepository;
@@ -53,14 +54,13 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     }
 
     @Override
-    public void registerAdmin(RegisterDto registerDto) {
+    public void registerAdmin(RegisterAdminDto registerDto) {
         PasswordEncoder passwordEncoder = MvcSecurityConfig.passwordEncoder();
 
         String hashPassword = passwordEncoder.encode(registerDto.getPassword());
 
-        Account account = new Account(registerDto.getUsername(), hashPassword,
-                registerDto.getFirstName(), registerDto.getLastName(),
-                registerDto.getAddress(), null, registerDto.getRole());
+        Account account = new Account(registerDto.getUsername(), hashPassword, null,
+                 null, null, null, registerDto.getRole());
 
         accountRepository.save(account);
     }
@@ -76,6 +76,14 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         }
 
         return tempAccount.getRole();
+    }
+
+    @Override
+    public Boolean checkExistingAccount(String username) {
+
+        Long totalUser = accountRepository.count(username);
+
+        return totalUser > 0 ? true : false;
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.indocyber.validation.UniqueUsername;
 import javax.validation.constraints.NotNull;
 
 @Compare(message="Password is not matched.", firstField="password", secondField="passwordConfirmation")
-public class RegisterDto {
+public class RegisterAdminDto {
 
     @NotNull
     @UniqueUsername(message = "Username already exists")
@@ -20,25 +20,13 @@ public class RegisterDto {
 
     private String role;
 
-    @NotNull
-    private String firstName;
+    public RegisterAdminDto(){}
 
-    @NotNull
-    private String lastName;
-
-    @NotNull
-    private String address;
-
-    public RegisterDto(){}
-
-    public RegisterDto(String username, String password, String passwordConfirmation, String role, String firstName, String lastName, String address) {
+    public RegisterAdminDto(String username, String password, String passwordConfirmation, String role) {
         this.username = username;
         this.password = password;
         this.passwordConfirmation = passwordConfirmation;
         this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
     }
 
     public String getUsername() {
@@ -71,29 +59,5 @@ public class RegisterDto {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }
