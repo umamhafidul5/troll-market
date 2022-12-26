@@ -3,7 +3,9 @@ package com.indocyber.service;
 import com.indocyber.dto.RegisterAdminDto;
 import com.indocyber.dto.RegisterDto;
 import com.indocyber.entity.Account;
+import com.indocyber.entity.Cart;
 import com.indocyber.repository.AccountRepository;
+import com.indocyber.repository.CartRepository;
 import com.indocyber.security.ApplicationUserDetails;
 import com.indocyber.security.MvcSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,12 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
     private final AccountRepository accountRepository;
 
+    private final CartRepository cartRepository;
+
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, CartRepository cartRepository) {
         this.accountRepository = accountRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -40,7 +45,10 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
                 registerDto.getFirstName(), registerDto.getLastName(),
                 registerDto.getAddress(), null, registerDto.getRole());
 
+        Cart cart = new Cart(account, null);
+
         accountRepository.save(account);
+        cartRepository.save(cart);
     }
 
     @Override
