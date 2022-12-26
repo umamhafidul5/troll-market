@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home-page :: head}">
 </head>
 <body>
+    <div class="main">
+        <header th:replace="~{home-page :: header}"></header>
+        <nav th:replace="~{home-page :: nav}"></nav>
+
+        <div class="top">
+            <span>Profile</span>
+        </div>
+
+        <div class="border">
+            <div class="search">
+                <form method="get" th:attr="action=@{/customer/index}" >
+
+                    <label>Seller</label>
+                    <input type="text" name="id" placeholder="seller" />
+                    <label>Buyer</label>
+                    <input type="text" name="id" placeholder="buyer" />
+
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="border">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Seller</th>
+                    <th>Buyer</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Shipment</th>
+                    <th>Total Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:unless="${transactionList.size() > 0}"
+                    th:each="d : ${transactionList}">
+                    <td th:text="${d.purchaseDate}"></td>
+                    <td th:text="|${d.merchandise.seller.firstName} ${d.merchandise.seller.lastName}|"></td>
+                    <td th:text="|${d.buyer.firstName} ${d.buyer.lastName}|"></td>
+                    <td th:text="${d.merchandiseName}"></td>
+                    <td th:text="${d.quantity}"></td>
+                    <td th:text="${d.shipment.name}"></td>
+                    <td th:text="${d.totalPrice}"></td>
+                </tr>
+                <tr th:unless="${transactionList.size() > 0}">
+                    <td class="no-data-found" th:colspan="7">No Data Found</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 
 </body>
 </html>

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -88,12 +89,17 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
         return totalUser > 0 ? true : false;
 
     }
-        @Override
+    @Override
     public Account getAccount() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Account> byId = this.accountRepository.findById(authentication.getName());
         return byId.orElseThrow();
+    }
+
+    @Override
+    public List<Account> getAccountsByRole(String role) {
+        return accountRepository.getAccountsByRole(role);
     }
 
     @Override

@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface TransactionService {
     List<Transaction> getTransactionsByAccount(Account account);
+
+    List<Transaction> getAllTransactionList();
+
+    Account findById(String username);
 }

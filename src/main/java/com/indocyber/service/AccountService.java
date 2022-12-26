@@ -4,6 +4,8 @@ import com.indocyber.dto.RegisterAdminDto;
 import com.indocyber.dto.RegisterDto;
 import com.indocyber.entity.Account;
 
+import java.util.List;
+
 public interface AccountService {
     void registerBuyer(RegisterDto registerDto);
     void registerSeller(RegisterDto registerDto);
@@ -12,4 +14,6 @@ public interface AccountService {
 
     Boolean checkExistingAccount(String username);
     Account getAccount();
+
+    List<Account> getAccountsByRole(String role);
 }
