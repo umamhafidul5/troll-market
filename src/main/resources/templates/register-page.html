@@ -27,6 +27,7 @@
 
 
                     <div class="input-data">
+                        <div class="error-input" th:errors="${account}"></div>
                         <div class="error-input" th:errors="*{passwordConfirmation}"></div>
                         <label>Confirm Password</label>
                         <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
@@ -35,7 +36,6 @@
 
                     <div class="input-data">
                         <div class="error-input" th:errors="*{role}"></div>
-                        <label>Role</label>
                         <input type="hidden" th:field="*{role}" placeholder="Role" />
                     </div>
 
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="input-data">
-                        <div th:errors="*{address}"></div>
+                        <div class="error-input" th:errors="*{address}"></div>
                         <label>Address</label>
                         <textarea th:field="*{address}" placeholder="Address"></textarea>
                     </div>
