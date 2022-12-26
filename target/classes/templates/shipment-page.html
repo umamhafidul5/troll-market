@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home-page :: head}">
+<!--<head>-->
     <meta charset="UTF-8">
     <title>Title</title>
+<!--    <title>Troll Market</title>-->
+<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/style-nyihui.css}">-->
 </head>
 <body>
-
+    <div class="main">
+        <header th:replace="~{home-page :: header}"></header>
+        <nav th:replace="~{home-page :: nav}"></nav>
+        <div class="top">
+            <span>Shipment</span>
+        </div>
+        <div class="top">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Service</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="shipment : ${shipmentList}">
+                        <td>
+                            <form method="post" th:action="@{/shipment/edit}">
+                                <input type="hidden" th:value="${shipment.id}">
+                                <button type="submit">Edit</button>
+                            </form>
+                            <form method="post" th:action="@{/shipment/delete}">
+                                <input type="hidden" th:value="${shipment.id}">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <form method="post" th:action="@{/shipment/stopService}">
+                                <input type="hidden" name="id" th:value="${shipment.id}">
+                                <button th:if="${shipment.service == true}" type="submit">Stop Service</button>
+                                <button th:if="${shipment.service == false}" disabled>Stop Service</button>
+                            </form>
+                        </td>
+                        <td th:text="${shipment.name}"></td>
+                        <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 0, 'COMMA')}"></td>
+                        <td th:text="${shipment.service == true} ? 'Yes' : 'No'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

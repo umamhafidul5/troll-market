@@ -1,6 +1,8 @@
 package com.indocyber.entity;
 
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 

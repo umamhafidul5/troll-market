@@ -2,6 +2,7 @@ package com.indocyber.service;
 
 import com.indocyber.dto.RegisterAdminDto;
 import com.indocyber.dto.RegisterDto;
+import com.indocyber.entity.Account;
 
 public interface AccountService {
     void registerBuyer(RegisterDto registerDto);
@@ -10,4 +11,5 @@ public interface AccountService {
     String getAccountRole(String username);
 
     Boolean checkExistingAccount(String username);
+    Account getAccount();
 }
