@@ -73,6 +73,7 @@ body {
 
 .title {
     font-size: 1.3em;
+    margin-bottom: 10px;
 }
 
 .input-data {
@@ -178,15 +179,25 @@ main, .border {
 table {
     width: 100%;
     border-collapse: collapse;
-    border: solid 2px black;
-    margin-bottom: 20px;
+}
+
+.top-border-none {
+    border-top: none;
+}
+
+.bottom-border-none {
+    border-bottom: none;
+}
+
+.left-border-none {
+    border-left: none;
 }
 
 th, td {
     padding: 7px 5px;
     text-transform: capitalize;
     text-align: center;
-    border-left: solid 2px black;
+    border: solid 2px black;
 }
 
 th {
@@ -366,6 +377,10 @@ input[type='submit']{
 .none {
     background-color: white;
     border: solid 2px black;
+}
+
+.no-background-color {
+    background-color: white;
 }
 
 .capitalize {
