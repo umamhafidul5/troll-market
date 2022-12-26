@@ -9,4 +9,6 @@ public interface ShipmentService {
     Shipment getShipmentById(int id);
 
     void saveShipment(Shipment shipment);
+
+    void deleteShipment(int id);
 }

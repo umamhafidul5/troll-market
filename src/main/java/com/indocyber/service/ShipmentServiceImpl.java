@@ -33,4 +33,9 @@ public class ShipmentServiceImpl implements ShipmentService {
     public void saveShipment(Shipment shipment) {
         shipmentRepository.save(shipment);
     }
+
+    @Override
+    public void deleteShipment(int id) {
+        shipmentRepository.deleteById(id);
+    }
 }

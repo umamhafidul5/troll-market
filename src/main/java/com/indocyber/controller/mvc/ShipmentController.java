@@ -25,7 +25,18 @@ public class ShipmentController {
     }
 
     @GetMapping("/index")
-    public String viewShipmentPage(Model model) {
+    public String viewShipmentPage(
+            Model model,
+            @RequestParam(name = "stopSuccess", required = false) Integer serviceId,
+            @RequestParam(name = "deletion", required = false) String serviceName
+    ) {
+        if(serviceId != null) {
+            model.addAttribute("service", shipmentService.getShipmentById(serviceId).getName());
+        }
+
+        if(serviceName != null) {
+            model.addAttribute("deletedName", serviceName);
+        }
         model.addAttribute("shipmentList", shipmentService.getAllShipment());
         return "shipment-page";
     }
@@ -40,6 +51,18 @@ public class ShipmentController {
             System.out.println(e);
         }
 
-        return "redirect:/shipment/index";
+        return "redirect:/shipment/index?stopSuccess=" + id;
+    }
+
+    @PostMapping("/delete")
+    public String deleteShipment(@RequestParam(name = "id") int id) {
+        Shipment shipment = shipmentService.getShipmentById(id);
+        try {
+            shipmentService.deleteShipment(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return "redirect:/shipment/index?deletion=" + shipment.getName();
     }
 }
