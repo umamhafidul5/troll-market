@@ -44,7 +44,7 @@
                             </form>
                         </td>
                         <td th:text="${shipment.name}"></td>
-                        <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 2, 'COMMA')}"></td>
+                        <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 0, 'COMMA')}"></td>
                         <td th:text="${shipment.service == true} ? 'Yes' : 'No'"></td>
                     </tr>
                     </tbody>
