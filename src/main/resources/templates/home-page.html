@@ -9,11 +9,11 @@
     <div class="main">
         <header th:fragment="header">
             <div>
-                <div>Troll Market</div>
+                <div>TROLL MARKET</div>
             </div>
             <div class="flex-row">
-                <span>Wellcome
-                <span th:text="${account.username}"></span>
+                <span>Welcome,
+                <span class="capitalize" th:text="${account.username}"></span>
                 </span>
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" value="Sign Out" />

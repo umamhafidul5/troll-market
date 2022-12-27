@@ -81,6 +81,7 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     column-gap: 20px;
     position: relative;
 }
@@ -394,6 +395,11 @@ input[type='submit']{
 .column2 {
     display: block;
     width: 100px;
+}
+
+.column2hf {
+    display: block;
+    width: 150px;
 }
 
 .column3 {

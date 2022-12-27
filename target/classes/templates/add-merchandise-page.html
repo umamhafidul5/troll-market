@@ -3,12 +3,64 @@
 <head th:replace="~{home-page :: head}">
 </head>
 <body>
-<div class="main">
-    <header th:replace="home-page :: header"></header>
-    <nav th:replace="home-page :: nav"></nav>
-    <div class="top">
-        <span>Merchandise > Add Product</span>
+    <div class="main">
+        <header th:replace="home-page :: header"></header>
+        <nav th:replace="home-page :: nav"></nav>
+        <div class="top">
+            <span>Merchandise > Add Product</span>
+        </div>
+        <main>
+            <form class="form-register"
+                  method="post"
+                  th:attr="action=@{/merchandise/saveProduct}"
+                  th:object="${merchandise}">
+
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <div class="input-data left">
+                    <div class="error-input" th:errors="*{name}"></div>
+                    <label class="column2">Name</label>
+                    <input type="text" th:field="*{name}" placeholder="Product Name" />
+                </div>
+
+                <div class="input-data left">
+                    <div class="error-input" th:errors="*{category}"></div>
+                    <label class="column2">Category</label>
+                    <input type="text" th:field="*{category}" placeholder="Category" />
+                </div>
+
+                <div class="input-data left">
+                    <div class="error-input" th:errors="*{description}"></div>
+                    <label class="column2">Description</label>
+                    <textarea th:field="*{description}" placeholder="Description"></textarea>
+                </div>
+
+                <div class="input-data left">
+                    <div class="error-input" th:errors="*{price}"></div>
+                    <label class="column2">Price</label>
+                    <input type="number" th:field="*{price}" placeholder="Price" />
+                </div>
+
+                <div class="input-data left">
+                    <div class="error-input" th:errors="*{isDiscontinue}"></div>
+                    <label class="column2">Discontinue</label>
+                    <input class="pointer" type="checkbox" id="isDiscontinue" th:field="*{isDiscontinue}" value="true">
+                </div>
+
+                <div class="input-data left">
+                    <input type="submit" value="Save"/>
+
+                    <a th:href="@{/merchandise/index}">
+                        <input type="button" value="Cancel">
+                    </a>
+       
+                </div>
+
+            </form>
+        </main>
+
     </div>
+<<<<<<< HEAD
     <main>
         <form class="form-register"
               method="post"
@@ -48,7 +100,7 @@
             </div>
 
             <div class="center">
-                <input type="submit" value="Save New Admin"/>
+                <input type="submit" value="Save"/>
                 <button class="btn btn-success">
                     <a th:href="@{/merchandise/index}">Cancel</a>
                 </button>
@@ -58,6 +110,8 @@
     </main>
 
 </div>
+=======
+>>>>>>> e144ee8 (memperbaiki css dan beberapa bagian minor view)
 
 </body>
 </html>
