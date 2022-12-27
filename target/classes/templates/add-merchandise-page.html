@@ -60,58 +60,6 @@
         </main>
 
     </div>
-<<<<<<< HEAD
-    <main>
-        <form class="form-register"
-              method="post"
-              th:attr="action=@{/merchandise/saveProduct}"
-              th:object="${merchandise}">
-
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
-            <div class="input-data">
-                <div class="error-input" th:errors="*{name}"></div>
-                <label>Name</label>
-                <input type="text" th:field="*{name}" placeholder="name" />
-            </div>
-
-            <div class="input-data">
-                <div class="error-input" th:errors="*{category}"></div>
-                <label>Category</label>
-                <input type="text" th:field="*{category}" placeholder="category" />
-            </div>
-
-            <div class="input-data">
-                <div class="error-input" th:errors="*{description}"></div>
-                <label>Description</label>
-                <textarea th:field="*{description}" placeholder="description"></textarea>
-            </div>
-
-            <div class="input-data">
-                <div class="error-input" th:errors="*{price}"></div>
-                <label>Price</label>
-                <input type="number" th:field="*{price}" placeholder="price" />
-            </div>
-
-            <div class="input-data">
-                <div class="error-input" th:errors="*{isDiscontinue}"></div>
-                <label>Discontinue</label>
-                <input type="checkbox" id="isDiscontinue" th:field="*{isDiscontinue}" value="true">
-            </div>
-
-            <div class="center">
-                <input type="submit" value="Save"/>
-                <button class="btn btn-success">
-                    <a th:href="@{/merchandise/index}">Cancel</a>
-                </button>
-            </div>
-
-        </form>
-    </main>
-
-</div>
-=======
->>>>>>> e144ee8 (memperbaiki css dan beberapa bagian minor view)
 
 </body>
 </html>
