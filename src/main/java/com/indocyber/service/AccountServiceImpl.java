@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
                 registerDto.getRole());
         accountRepository.save(account);
 
-        Cart cart = new Cart(accountRepository.findById(account.getUsername()).orElseThrow(), new ArrayList<>());
+        Cart cart = new Cart(accountRepository.findById(account.getUsername()).orElseThrow());
         cartRepository.save(cart);
     }
 
