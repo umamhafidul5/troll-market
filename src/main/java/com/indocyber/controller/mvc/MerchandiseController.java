@@ -62,6 +62,8 @@ public class MerchandiseController {
             return "add-merchandise-page";
         }
 
+        merchandiseService.saveProduct(dto);
+
         return "redirect:/merchandise/index";
     }
 }
