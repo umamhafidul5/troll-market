@@ -44,4 +44,9 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return tempAccount;
     }
+
+    @Override
+    public List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer) {
+        return transactionRepository.searchTransaction(usernameSeller, usernameBuyer);
+    }
 }

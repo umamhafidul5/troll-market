@@ -13,12 +13,25 @@
 
         <div class="border">
             <div class="search">
-                <form method="get" th:attr="action=@{/customer/index}" >
+                <form method="get" th:attr="action=@{/history/searchHistory}" >
 
                     <label>Seller</label>
-                    <input type="text" name="id" placeholder="seller" />
+                    <select name="seller">
+                        <option value=''>Select</option>
+                        <option th:each="option : ${sellerList}"
+                                th:value="${option.username}"
+                                th:text="|${option.firstName} ${option.lastName}|"
+                                th:selected="${option.username == usernameSeller}"></option>
+                    </select>
+
                     <label>Buyer</label>
-                    <input type="text" name="id" placeholder="buyer" />
+                    <select name="buyer">
+                        <option value=''>Select</option>
+                        <option th:each="option : ${buyerList}"
+                                th:value="${option.username}"
+                                th:text="|${option.firstName} ${option.lastName}|"
+                                th:selected="${option.username == usernameBuyer}"></option>
+                    </select>
 
                     <button type="submit">Search</button>
                 </form>
