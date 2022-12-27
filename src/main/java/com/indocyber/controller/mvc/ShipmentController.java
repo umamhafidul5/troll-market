@@ -1,6 +1,7 @@
 package com.indocyber.controller.mvc;
 
 import com.indocyber.entity.Shipment;
+import com.indocyber.service.AccountService;
 import com.indocyber.service.ShipmentService;
 import com.indocyber.service.ShipmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ShipmentController {
     ShipmentService shipmentService;
 
     @Autowired
+    private AccountService accountService;
+
+    @Autowired
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
@@ -30,6 +34,7 @@ public class ShipmentController {
             @RequestParam(name = "stopSuccess", required = false) Integer serviceId,
             @RequestParam(name = "deletion", required = false) String serviceName
     ) {
+        model.addAttribute("account", accountService.getAccount());
         if(serviceId != null) {
             model.addAttribute("service", shipmentService.getShipmentById(serviceId).getName());
         }

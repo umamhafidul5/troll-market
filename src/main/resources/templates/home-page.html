@@ -12,6 +12,9 @@
                 <div>Troll Market</div>
             </div>
             <div>
+                <span>Wellcome
+                <span th:text="${account.username}"></span>
+                </span>
                 <form th:action="@{/logout}" method="post">
                     <input type="submit" value="Sign Out" />
                 </form>

@@ -34,7 +34,8 @@ public class AdminController {
         RegisterDto dto = new RegisterDto();
         dto.setRole("Admin");
 
-        model.addAttribute("account", dto);
+        model.addAttribute("admin", dto);
+        model.addAttribute("account", accountService.getAccount());
 
         return "admin-page";
     }

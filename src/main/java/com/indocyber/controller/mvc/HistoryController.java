@@ -26,6 +26,7 @@ public class HistoryController {
         model.addAttribute("transactionList", transactionService.getAllTransactionList());
         model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
+        model.addAttribute("account", accountService.getAccount());
 
         return "history-page";
     }
@@ -36,6 +37,7 @@ public class HistoryController {
         model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
         model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
+        model.addAttribute("account", accountService.getAccount());
         return "history-page";
     }
 }

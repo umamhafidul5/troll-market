@@ -26,6 +26,7 @@ public class ProfileController {
         model.addAttribute("account", accountService.getAccount());
         model.addAttribute("transactionList",
                 transactionService.getTransactionsByAccount(accountService.getAccount()));
+        model.addAttribute("account", accountService.getAccount());
         return "profile-page";
     }
 

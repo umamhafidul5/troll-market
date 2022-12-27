@@ -1,6 +1,7 @@
 package com.indocyber.controller.mvc;
 
 import com.indocyber.repository.CartMerchandiseRepository;
+import com.indocyber.service.AccountService;
 import com.indocyber.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,9 @@ public class MyCartController {
     CartMerchandiseRepository cartMerchandiseRepository;
 
     @Autowired
+    private AccountService accountService;
+
+    @Autowired
     public MyCartController(CartService cartService, CartMerchandiseRepository cartMerchandiseRepository) {
         this.cartService = cartService;
         this.cartMerchandiseRepository = cartMerchandiseRepository;
@@ -28,6 +32,7 @@ public class MyCartController {
     public String viewMyCartPage(Model model) {
 //        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("merchandiseList", cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
+        model.addAttribute("account", accountService.getAccount());
         return "my-cart-page";
     }
 
