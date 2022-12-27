@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{home-page :: head}">
-<!--<head>-->
-    <meta charset="UTF-8">
-    <title>Title</title>
-<!--    <title>Troll Market</title>-->
-<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
-<!--    <link rel="stylesheet" th:href="@{/style-nyihui.css}">-->
 </head>
 <body>
     <div class="main">
@@ -15,14 +9,17 @@
         <div class="top">
             <span>Shipment</span>
         </div>
-        <div class="top">
+        <div class="border">
             <div>
+                <div>
+                    <a th:href="@{/}" class="margin-bottom"><button>Add New Shipment</button></a>
+                </div>
                 <div th:if="${param.stopSuccess}" th:text="${'Shipment ' + service + ' sudah distop.'}"></div>
                 <div th:if="${param.deletion}" th:text="${'Shipment ' + deletedName + ' sudah didelete.'}"></div>
-                <table>
+                <table class="table">
                     <thead>
                     <tr>
-                        <th></th>
+                        <th class="bottom-border-none left-border-none top-border-none no-background-color"></th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Service</th>
@@ -30,7 +27,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="shipment : ${shipmentList}">
-                        <td>
+                        <td class="bottom-border-none left-border-none top-border-none no-background-color">
                             <form method="post" th:action="@{/shipment/edit}">
                                 <input type="hidden" name="id" th:value="${shipment.id}">
                                 <button type="submit">Edit</button>
@@ -48,6 +45,10 @@
                         <td th:text="${shipment.name}"></td>
                         <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 0, 'COMMA')}"></td>
                         <td th:text="${shipment.service == true} ? 'Yes' : 'No'"></td>
+                    </tr>
+                    <tr th:unless="${shipmentList.size() > 0}">
+                        <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>
+                        <td class="no-data-found" th:colspan="3">No Data Found</td>
                     </tr>
                     </tbody>
                 </table>
