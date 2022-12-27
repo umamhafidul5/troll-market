@@ -54,6 +54,11 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     }
 
     @Override
+    public void saveBuyer(Account account) {
+        accountRepository.save(account);
+    }
+
+    @Override
     public void registerSeller(RegisterDto registerDto) {
         PasswordEncoder passwordEncoder = MvcSecurityConfig.passwordEncoder();
 

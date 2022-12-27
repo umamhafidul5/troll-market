@@ -1,5 +1,6 @@
 package com.indocyber.controller.mvc;
 
+import com.indocyber.entity.Account;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,11 @@ public class ProfileController {
     }
 
     @RequestMapping("/top-up")
-    public String topUp(@RequestParam("topUp") String topUp) {
-        BigDecimal topUpAmount = new BigDecimal(topUp);
+    public String topUp(@RequestParam("topUp") BigDecimal topUp) {
+//        BigDecimal topUpAmount = new BigDecimal(topUp);
+        Account buyer = accountService.getAccount();
+        buyer.setBalance(buyer.getBalance().add(topUp));
+        accountService.saveBuyer(buyer);
         return "redirect:/profile/index";
     }
 }

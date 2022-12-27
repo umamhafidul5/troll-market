@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface AccountService {
     void registerBuyer(RegisterDto registerDto);
+    void saveBuyer(Account account);
     void registerSeller(RegisterDto registerDto);
     void registerAdmin(RegisterAdminDto registerDto);
     String getAccountRole(String username);
