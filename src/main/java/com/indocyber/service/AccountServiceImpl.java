@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,11 +45,11 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
         Account account = new Account(registerDto.getUsername(), hashPassword,
                 registerDto.getFirstName(), registerDto.getLastName(),
-                registerDto.getAddress(), null, registerDto.getRole());
-
-        Cart cart = new Cart(account, null);
-
+                registerDto.getAddress(), new BigDecimal(0),
+                registerDto.getRole());
         accountRepository.save(account);
+
+        Cart cart = new Cart(accountRepository.findById(account.getUsername()).orElseThrow(), new ArrayList<>());
         cartRepository.save(cart);
     }
 
@@ -59,7 +61,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
         Account account = new Account(registerDto.getUsername(), hashPassword,
                 registerDto.getFirstName(), registerDto.getLastName(),
-                registerDto.getAddress(), null, registerDto.getRole());
+                registerDto.getAddress(), new BigDecimal(0), registerDto.getRole());
 
         accountRepository.save(account);
     }
