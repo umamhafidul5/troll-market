@@ -24,16 +24,18 @@ public class HistoryController {
     public String index(Model model){
 
         model.addAttribute("transactionList", transactionService.getAllTransactionList());
-//        model.addAttribute("buyerList", accountService.getAccountRole("Buyer"));
-//        model.addAttribute("sellerList", accountService.getAccountRole("Seller"));
+        model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
+        model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
 
         return "history-page";
     }
 
-    @GetMapping("/searchByAccount")
-    public String searchByAccount(@RequestParam("username") String username, Model model){
-        Account account = transactionService.findById(username);
-        model.addAttribute("transactionList", transactionService.getTransactionsByAccount(account));
-        return "redirect:/history/index";
+    @GetMapping("/searchHistory")
+    public String searchHistory(@RequestParam("usernameSeller") String usernameSeller,
+                                @RequestParam("usernameBuyer") String usernameBuyer, Model model){
+        model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
+        model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
+        model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
+        return "history-page";
     }
 }
