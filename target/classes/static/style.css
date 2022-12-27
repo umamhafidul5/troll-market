@@ -425,3 +425,8 @@ input[type='submit']{
 .half-width {
     width: 50%;
 }
+
+.margin-bottom {
+    display: block;
+    margin-bottom: 10px;
+}

@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:unless="${merchandiseList.size() > 0}"
+                <tr th:if="${merchandiseList.size() > 0}"
                     th:each="d : ${merchandiseList}">
                     <td class="bottom-border-none left-border-none top-border-none no-background-color">
                         <a th:href="@{/}">
