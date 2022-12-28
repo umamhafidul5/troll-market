@@ -6,7 +6,6 @@ const popUp = document.querySelector(".pop-up");
 const batal = document.querySelector(".batal");
 
 
-<<<<<<< HEAD
 const info = document.querySelector(".info");
 
 if (tambahDana != null) {
@@ -31,13 +30,3 @@ if (info != null) {
         popUp.classList.add("show");
     })
 }
-
-=======
-tambahDana.addEventListener("click", () => {
-    popUp.classList.add("show");
-})
-
-batal.addEventListener("click", () => {
-    popUp.classList.remove("show");
-})
->>>>>>> cfa365c615add0d49928bccfe5d001b1e562c9df
