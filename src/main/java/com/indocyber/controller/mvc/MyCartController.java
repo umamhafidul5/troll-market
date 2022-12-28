@@ -30,7 +30,6 @@ public class MyCartController {
 
     @GetMapping("/index")
     public String viewMyCartPage(Model model) {
-//        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("merchandiseList", cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName()));
         model.addAttribute("account", accountService.getAccount());
         return "my-cart-page";
