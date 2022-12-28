@@ -45,8 +45,7 @@ public class AdminController {
                                   BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println("sampe sini");
-            bindingResult.getAllErrors().forEach(System.out::println);
+
             return "admin-page";
         }
         accountService.registerAdmin(dto);

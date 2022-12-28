@@ -17,23 +17,23 @@
 
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-                <div class="input-data">
+                <div class="input-data left">
                     <div class="error-input" th:errors="*{username}"></div>
-                    <label>Username</label>
+                    <label class="column2hf">Username</label>
                     <input type="text" th:field="*{username}" placeholder="Username" />
                 </div>
 
-                <div class="input-data">
+                <div class="input-data left">
                     <div class="error-input" th:errors="*{password}"></div>
-                    <label>Password</label>
+                    <label class="column2hf">Password</label>
                     <input type="password" th:field="*{password}" placeholder="Password" />
                 </div>
 
 
-                <div class="input-data">
+                <div class="input-data left">
                     <div class="error-input" th:errors="${account}"></div>
                     <div class="error-input" th:errors="*{passwordConfirmation}"></div>
-                    <label>Confirm Password</label>
+                    <label class="column2hf">Confirm Password</label>
                     <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
                 </div>
 
@@ -43,7 +43,7 @@
                     <input type="hidden" th:field="*{role}" placeholder="Role" />
                 </div>
 
-                <div class="center">
+                <div class="input-data left">
                     <input type="submit" value="Save New Admin"/>
                 </div>
 

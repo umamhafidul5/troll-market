@@ -120,8 +120,6 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("username: " + username);
-
         Optional<Account> optionalAccount = accountRepository.findById(username);
 
         Account tempAccount = null;

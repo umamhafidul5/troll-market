@@ -58,7 +58,6 @@ public class MerchandiseController {
                               BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(System.out::println);
             return "add-merchandise-page";
         }
 

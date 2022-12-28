@@ -12,7 +12,8 @@
         <div class="border">
             <div>
                 <div>
-                    <a th:href="@{/}" class="margin-bottom"><button>Add New Shipment</button></a>
+                    <a th:href="@{/}" class="margin-bottom">
+                        <input type="button" value="Add New Shipment"></a>
                 </div>
                 <div th:if="${param.stopSuccess}" th:text="${'Shipment ' + service + ' sudah distop.'}"></div>
                 <div th:if="${param.deletion}" th:text="${'Shipment ' + deletedName + ' sudah didelete.'}"></div>
