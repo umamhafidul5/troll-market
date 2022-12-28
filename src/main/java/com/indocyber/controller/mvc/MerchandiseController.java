@@ -50,6 +50,19 @@ public class MerchandiseController {
 
         model.addAttribute("merchandise", dto);
         model.addAttribute("account", accountService.getAccount());
+        model.addAttribute("add", true);
+
+        return "add-merchandise-page";
+    }
+
+    @GetMapping("/editProduct")
+    public String editProduct(@RequestParam("id") int id, Model model) {
+
+        MerchandiseDto dto = merchandiseService.findProduct(id);
+
+        model.addAttribute("merchandise", dto);
+        model.addAttribute("account", accountService.getAccount());
+//        model.addAttribute("add", false);
 
         return "add-merchandise-page";
     }

@@ -40,7 +40,7 @@
                     <tr th:if="${merchandiseList.size() > 0}"
                         th:each="d : ${merchandiseList}">
                         <td class="bottom-border-none left-border-none top-border-none no-background-color">
-                            <a th:href="@{/}">
+                            <a th:href="@{/merchandise/editProduct(id=${d.id})}">
                                 <input type="button" value="Edit">
                             </a>
 

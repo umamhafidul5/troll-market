@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class MerchandiseDto {
 
+    private int id;
+
     @NotNull
     private String name;
 
@@ -21,12 +23,21 @@ public class MerchandiseDto {
 
     public MerchandiseDto(){}
 
-    public MerchandiseDto(String name, String category, String description, BigDecimal price, boolean isDiscontinue) {
+    public MerchandiseDto(int id, String name, String category, String description, BigDecimal price, boolean isDiscontinue) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.description = description;
         this.price = price;
         this.isDiscontinue = isDiscontinue;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
