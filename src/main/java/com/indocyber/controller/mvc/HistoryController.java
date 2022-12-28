@@ -32,12 +32,13 @@ public class HistoryController {
     }
 
     @GetMapping("/searchHistory")
-    public String searchHistory(@RequestParam("usernameSeller") String usernameSeller,
-                                @RequestParam("usernameBuyer") String usernameBuyer, Model model){
+    public String searchHistory(@RequestParam(name = "usernameSeller", required = false, defaultValue = "") String usernameSeller,
+                                @RequestParam(name = "usernameBuyer", required = false, defaultValue = "") String usernameBuyer, Model model){
         model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
         model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
         model.addAttribute("account", accountService.getAccount());
+
         return "history-page";
     }
 }

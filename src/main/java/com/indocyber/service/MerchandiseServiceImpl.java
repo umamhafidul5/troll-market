@@ -29,7 +29,7 @@ public class MerchandiseServiceImpl implements MerchandiseService {
 
     @Override
     public List<Merchandise> getAllMerchandiseBy(String name, String category, String description) {
-        return merchandiseRepository.getMerchandisesByNameOrCategoryOrDescription(name, category, description);
+        return merchandiseRepository.getMerchandisesByNameAndCategoryAndDescription(name, category, description);
     }
 
     @Override

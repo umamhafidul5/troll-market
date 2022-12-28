@@ -43,7 +43,6 @@ textarea {
 a {
     text-decoration: none;
     color: inherit;
-    padding: 10px 20px;
 }
 
 body {
@@ -82,6 +81,7 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
     column-gap: 20px;
     position: relative;
 }
@@ -203,7 +203,6 @@ th, td {
 
 th {
     background-color: #9E9E9E;
-    color: #FCFCFC;
 }
 
 td > a {
@@ -398,6 +397,11 @@ input[type='submit']{
     width: 100px;
 }
 
+.column2hf {
+    display: block;
+    width: 150px;
+}
+
 .column3 {
     display: block;
     width: 300px;
@@ -446,6 +450,7 @@ input[type='submit']{
     transform: scale(0);
     opacity: 0;
     transition: .3s;
+    z-index: 2;
 }
 
 .show {
