@@ -59,11 +59,9 @@ public class MerchandiseController {
                               BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-<<<<<<< HEAD
             bindingResult.getAllErrors().forEach(System.out::println);
             model.addAttribute("account", accountService.getAccount());
-=======
->>>>>>> cfa365c615add0d49928bccfe5d001b1e562c9df
+
             return "add-merchandise-page";
         }
 
