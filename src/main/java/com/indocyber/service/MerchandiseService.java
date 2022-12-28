@@ -12,4 +12,10 @@ public interface MerchandiseService {
 
     void saveProduct (MerchandiseDto merchandiseDto);
 
+    void saveMerchandise (Merchandise merchandise);
+
+    void deleteProduct(int id);
+
+    Merchandise findById(int i);
+
 }

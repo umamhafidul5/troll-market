@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MerchandiseRepository extends JpaRepository<Merchandise, Integer> {
 
-    List<Merchandise> getMerchandisesByNameOrCategoryOrDescription(String name, String category, String description);
+    List<Merchandise> getMerchandisesByNameAndCategoryAndDescription(String name, String category, String description);
 }
