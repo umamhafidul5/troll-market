@@ -1,5 +1,6 @@
 package com.indocyber.service;
 
+import com.indocyber.dto.ShipmentDto;
 import com.indocyber.entity.Shipment;
 import com.indocyber.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,16 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public void saveShipment(Shipment shipment) {
+    public void saveShipment(ShipmentDto shipmentDto) {
+        Shipment shipment = new Shipment();
+        shipment.setName(shipmentDto.getName());
+        shipment.setPrice(shipmentDto.getPrice());
+        shipment.setService(shipmentDto.isService());
+        shipmentRepository.save(shipment);
+    }
+
+    @Override
+    public void updateShipment(Shipment shipment) {
         shipmentRepository.save(shipment);
     }
 

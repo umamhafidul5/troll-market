@@ -41,10 +41,10 @@
                             (cartMerchandise.merchandise.price * cartMerchandise.quantity) + cartMerchandise.shipment.price
                             , 3, 'POINT', 0, 'COMMA')}"></td>
                     </tr>
-<!--                    <tr th:unless="${shipmentList.size() > 0}">-->
-<!--                        <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>-->
-<!--                        <td class="no-data-found" th:colspan="3">No Data Found</td>-->
-<!--                    </tr>-->
+                    <tr th:unless="${merchandiseList.size() > 0}">
+                        <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>
+                        <td class="no-data-found" th:colspan="5">No Data Found</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

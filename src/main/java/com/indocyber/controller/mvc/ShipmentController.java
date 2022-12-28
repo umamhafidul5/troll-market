@@ -8,10 +8,7 @@ import com.indocyber.service.ShipmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 
@@ -53,7 +50,7 @@ public class ShipmentController {
         try {
             Shipment shipment = shipmentService.getShipmentById(id);
             shipment.setService(false);
-            shipmentService.saveShipment(shipment);
+            shipmentService.updateShipment(shipment);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -71,5 +68,15 @@ public class ShipmentController {
         }
 
         return "redirect:/shipment/index?deletion=" + shipment.getName();
+    }
+
+    @PostMapping("/add")
+    public String addShipment(@ModelAttribute(name = "shipmentDto") ShipmentDto shipmentDto) {
+        try {
+            shipmentService.saveShipment(shipmentDto);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "redirect:/shipment/index";
     }
 }
