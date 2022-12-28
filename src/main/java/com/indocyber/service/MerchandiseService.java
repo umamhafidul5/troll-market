@@ -18,4 +18,6 @@ public interface MerchandiseService {
 
     Merchandise findById(int i);
 
+    MerchandiseDto findProduct(int i);
+
 }

@@ -42,11 +42,25 @@ public class MerchandiseServiceImpl implements MerchandiseService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Account> account = this.accountRepository.findById(authentication.getName());
         Account account1 = account.get();
+        Merchandise merchandise = null;
 //        boolean value = merchandiseDto.getIsDiscontinue().equals("1") ? true : false;
-        Merchandise merchandise = new Merchandise(account1, merchandiseDto.getName(),
-                merchandiseDto.getCategory(), merchandiseDto.getDescription(), merchandiseDto.getPrice(),
-                merchandiseDto.getIsDiscontinue());
-        merchandiseRepository.save(merchandise);
+        if(merchandiseDto.getId() == 0){
+            merchandise = new Merchandise(account1, merchandiseDto.getName(),
+                    merchandiseDto.getCategory(), merchandiseDto.getDescription(), merchandiseDto.getPrice(),
+                    merchandiseDto.getIsDiscontinue());
+            merchandiseRepository.save(merchandise);
+        }else {
+            merchandise = merchandiseRepository.findById(merchandiseDto.getId()).get();
+            System.out.println(merchandiseDto.getId());
+            merchandise.setId(merchandiseDto.getId());
+            merchandise.setName(merchandiseDto.getName());
+            merchandise.setCategory(merchandiseDto.getCategory());
+            merchandise.setDescription(merchandiseDto.getDescription());
+            merchandise.setPrice(merchandiseDto.getPrice());
+            merchandise.setIsDiscontinue(merchandiseDto.getIsDiscontinue());
+            merchandise.setSeller(account1);
+            merchandiseRepository.save(merchandise);
+        }
     }
 
     @Override
@@ -67,5 +81,17 @@ public class MerchandiseServiceImpl implements MerchandiseService {
             tempMerchandise = merchandise.get();
         }
         return tempMerchandise;
+    }
+
+    @Override
+    public MerchandiseDto findProduct(int i) {
+        Optional<Merchandise> merchandise = merchandiseRepository.findById(i);
+        MerchandiseDto merchandiseDto = null;
+        if(merchandise.isPresent()){
+            merchandiseDto = new MerchandiseDto(merchandise.get().getId(), merchandise.get().getName(),
+                    merchandise.get().getCategory(), merchandise.get().getDescription(),
+                    merchandise.get().getPrice(), merchandise.get().getIsDiscontinue());
+        }
+        return merchandiseDto;
     }
 }
