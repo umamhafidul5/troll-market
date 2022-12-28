@@ -65,7 +65,7 @@ public class MerchandiseDto {
         return isDiscontinue;
     }
 
-    public void setDiscontinue(boolean discontinue) {
+    public void setIsDiscontinue(boolean discontinue) {
         isDiscontinue = discontinue;
     }
 }

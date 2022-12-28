@@ -6,12 +6,28 @@ const popUp = document.querySelector(".pop-up");
 const batal = document.querySelector(".batal");
 
 
-tambahDana.addEventListener("click", () => {
-    console.log("click");
-    popUp.classList.add("show");
-})
+const info = document.querySelector(".info");
 
-batal.addEventListener("click", () => {
-    console.log("click");
-    popUp.classList.remove("show");
-})
+if (tambahDana != null) {
+    tambahDana.addEventListener("click", () => {
+        console.log("click");
+        popUp.classList.add("show");
+    })
+}
+
+if (batal != null) {
+    batal.addEventListener("click", () => {
+        console.log("click");
+        popUp.classList.remove("show");
+    })
+}
+
+
+console.log("info ", info);
+if (info != null) {
+    info.addEventListener("click", () => {
+        console.log("click");
+        popUp.classList.add("show");
+    })
+}
+

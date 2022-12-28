@@ -42,9 +42,30 @@ public class MerchandiseServiceImpl implements MerchandiseService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Account> account = this.accountRepository.findById(authentication.getName());
         Account account1 = account.get();
+//        boolean value = merchandiseDto.getIsDiscontinue().equals("1") ? true : false;
         Merchandise merchandise = new Merchandise(account1, merchandiseDto.getName(),
                 merchandiseDto.getCategory(), merchandiseDto.getDescription(), merchandiseDto.getPrice(),
                 merchandiseDto.getIsDiscontinue());
         merchandiseRepository.save(merchandise);
+    }
+
+    @Override
+    public void saveMerchandise(Merchandise merchandise) {
+        merchandiseRepository.save(merchandise);
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        merchandiseRepository.deleteById(id);
+    }
+
+    @Override
+    public Merchandise findById(int i) {
+        Optional<Merchandise> merchandise = merchandiseRepository.findById(i);
+        Merchandise tempMerchandise = null;
+        if(merchandise.isPresent()){
+            tempMerchandise = merchandise.get();
+        }
+        return tempMerchandise;
     }
 }

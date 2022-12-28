@@ -41,12 +41,12 @@ public class AdminController {
     }
 
     @PostMapping("/registerAdmin")
-    public String registerAccount(@Valid @ModelAttribute("account") RegisterAdminDto dto,
-                                  BindingResult bindingResult) {
+    public String registerAccount(@Valid @ModelAttribute("admin") RegisterAdminDto dto,
+                                  BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println("sampe sini");
             bindingResult.getAllErrors().forEach(System.out::println);
+            model.addAttribute("account", accountService.getAccount());
             return "admin-page";
         }
         accountService.registerAdmin(dto);

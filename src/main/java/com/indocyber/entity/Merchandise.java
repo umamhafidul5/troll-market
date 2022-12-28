@@ -90,11 +90,11 @@ public class Merchandise {
         this.price = price;
     }
 
-    public boolean isDiscontinue() {
+    public boolean getIsDiscontinue() {
         return isDiscontinue;
     }
 
-    public void setDiscontinue(boolean discontinue) {
+    public void setIsDiscontinue(boolean discontinue) {
         isDiscontinue = discontinue;
     }
 }
