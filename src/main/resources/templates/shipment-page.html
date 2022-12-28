@@ -9,10 +9,38 @@
         <div class="top">
             <span>Shipment</span>
         </div>
+        <div class="pop-up border">
+            <form th:action="@{/shipment/add}" method="post" th:object="${shipmentDto}">
+                <div class="column">
+                    <label class="margin-bottom">Name</label>
+                    <input class="margin-bottom" type="text" th:field="*{name}">
+<!--                    <input class="margin-bottom" name="topUp" type="number" min="10000" step="500">-->
+                </div>
+                <div class="column">
+                    <label class="margin-bottom">Price</label>
+                    <input class="margin-bottom" th:field="*{price}" type="number" min="10000" step="500">
+                </div>
+                <div class="column">
+                    <label class="margin-bottom">Service</label>
+                    <input type="checkbox" name="service" th:field="*{service}">
+<!--                    <input class="margin-bottom" name="topUp" type="number" min="10000" step="500">-->
+                </div>
+
+                <div class="input-data right no-margin">
+                    <a>
+                        <input type="submit" value="Tambah">
+                    </a>
+
+                    <a>
+                        <input class="batal" type="button" value="Batal">
+                    </a>
+                </div>
+            </form>
+        </div>
         <div class="border">
             <div>
                 <div>
-                    <a th:href="@{/}" class="margin-bottom"><button>Add New Shipment</button></a>
+                    <a class="tambah-dana margin-bottom"><button>Add New Shipment</button></a>
                 </div>
                 <div th:if="${param.stopSuccess}" th:text="${'Shipment ' + service + ' sudah distop.'}"></div>
                 <div th:if="${param.deletion}" th:text="${'Shipment ' + deletedName + ' sudah didelete.'}"></div>
@@ -55,5 +83,6 @@
             </div>
         </div>
     </div>
+    <script th:src="@{/site.js}"></script>
 </body>
 </html>

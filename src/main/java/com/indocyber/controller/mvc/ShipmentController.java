@@ -1,5 +1,6 @@
 package com.indocyber.controller.mvc;
 
+import com.indocyber.dto.ShipmentDto;
 import com.indocyber.entity.Shipment;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.ShipmentService;
@@ -35,6 +36,7 @@ public class ShipmentController {
             @RequestParam(name = "deletion", required = false) String serviceName
     ) {
         model.addAttribute("account", accountService.getAccount());
+        model.addAttribute("shipmentDto", new ShipmentDto());
         if(serviceId != null) {
             model.addAttribute("service", shipmentService.getShipmentById(serviceId).getName());
         }
