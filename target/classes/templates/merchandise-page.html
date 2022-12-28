@@ -4,16 +4,38 @@
 </head>
 <body>
     <div class="column">
-        <div class="pop-up border">
-            <div>Name       : <span></span></div>
-            <div>Category   : <span></span></div>
-            <div>Description: <span></span></div>
-            <div>Price      : <span></span></div>
-            <div>Discontinue: <span></span></div>
+        <div class="pop-up border capitalize landscape">
+            <div class="input-data left">
+                <span class="column2">Name</span>
+                <span></span>
+            </div>
 
-            <a>
-                <input class="batal" type="button" value="Batal">
-            </a>
+            <div class="input-data left">
+                <span class="column2">Category</span>
+                <span></span>
+            </div>
+
+            <div class="input-data left">
+                <span class="column2">Description</span>
+                <span></span>
+            </div>
+
+            <div class="input-data left">
+                <span class="column2">Price</span>
+                <span></span>
+            </div>
+
+            <div class="input-data left">
+                <span class="column2">Discontinue</span>
+                <span></span>
+            </div>
+
+            <div class="input-data left">
+                <a>
+                    <input class="batal no-margin" type="button" value="Batal">
+                </a>
+            </div>
+
         </div>
         <div class="main">
             <header th:replace="~{home-page :: header}"></header>
@@ -27,7 +49,7 @@
                 <a th:href="@{/merchandise/addProduct}" class="margin-bottom">
                     <input type="button" value="Add New Product">
                 </a>
-                <table class="table">
+                <table class="table button-in-table">
                     <thead>
                     <tr>
                         <th class="bottom-border-none left-border-none top-border-none no-background-color"></th>
@@ -49,7 +71,7 @@
                             </a>
 
                             <a>
-                                <Button class="info" th:value="${d.id}">Info</Button>
+                                <Button class="info pointer" th:value="${d.id}">Info</Button>
                             </a>
 
                             <a th:href="@{/merchandise/discontinue(id=${d.id})}">

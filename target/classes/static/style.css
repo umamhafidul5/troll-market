@@ -8,6 +8,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
+input[type="search"],
 .input-instead,
 textarea {
     width: 200px;
@@ -192,6 +193,14 @@ table {
 
 .left-border-none {
     border-left: none;
+}
+
+.button-in-table th:first-child, .button-in-table td:first-child {
+    width: 30%;
+}
+
+.button-in-table1 th:first-child, .button-in-table1 td:first-child {
+    width: 10%;
 }
 
 th, td {
@@ -451,9 +460,14 @@ input[type='submit']{
     opacity: 0;
     transition: .3s;
     z-index: 2;
+    background-color: white;
 }
 
 .show {
     transform: scale(1);
     opacity: 1;
+}
+
+.landscape {
+    padding: 20px 80px;
 }

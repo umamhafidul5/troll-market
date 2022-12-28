@@ -5,7 +5,12 @@ const popUp = document.querySelector(".pop-up");
 
 const batal = document.querySelector(".batal");
 
-var object;
+let object;
+
+const formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+});
 
 const info = document.querySelectorAll(".info");
 
@@ -41,9 +46,9 @@ async function fetchInfo (id){
             .then(response => response.json())
             .then(data => object = data)
 
-    popUp.children[0].children[0].innerText = object.name;
-    popUp.children[1].children[0].innerText = object.category;
-    popUp.children[2].children[0].innerText = object.description;
-    popUp.children[3].children[0].innerText = object.price;
-    popUp.children[4].children[0].innerText = object.isDiscontinue == true? 'yes' : 'no' ;
+    popUp.children[0].children[1].innerText = object.name;
+    popUp.children[1].children[1].innerText = object.category;
+    popUp.children[2].children[1].innerText = object.description;
+    popUp.children[3].children[1].innerText = formatter.format(object.price);
+    popUp.children[4].children[1].innerText = object.isDiscontinue == true? "yes" : "no" ;
 }
