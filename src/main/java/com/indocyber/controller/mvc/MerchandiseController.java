@@ -86,9 +86,10 @@ public class MerchandiseController {
     }
 
     @GetMapping("/infoProduct")
-    public String infoProduct(@RequestParam("id") int id, Model model){
+    @ResponseBody
+    public Merchandise infoProduct(@RequestParam("id") int id){
         Merchandise merchandise = merchandiseService.findById(id);
-        model.addAttribute("product", merchandise);
-        return "redirect:/merchandise/index";
+        return merchandise;
     }
+
 }

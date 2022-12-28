@@ -5,11 +5,11 @@
 <body>
     <div class="column">
         <div class="pop-up border">
-<!--            <span>Name       : <span th:text="${product.name}"></span></span>-->
-<!--            <span>Category   : <span th:text="${product.category}"></span></span>-->
-<!--            <span>Description: <span th:text="${product.description}"></span></span>-->
-<!--            <span>Price      : <span th:text="${product.price}"></span></span>-->
-<!--            <span>Discontinue: <span th:text="${product.isDiscontinue ? 'Yes' : 'No'}"></span></span>-->
+            <div>Name       : <span></span></div>
+            <div>Category   : <span></span></div>
+            <div>Description: <span></span></div>
+            <div>Price      : <span></span></div>
+            <div>Discontinue: <span></span></div>
 
             <a>
                 <input class="batal" type="button" value="Batal">
@@ -48,8 +48,8 @@
                                 <input type="button" value="Delete">
                             </a>
 
-                            <a >
-                                <input class="info" type="button" value="Info">
+                            <a>
+                                <Button class="info" th:value="${d.id}">Info</Button>
                             </a>
 
                             <a th:href="@{/merchandise/discontinue(id=${d.id})}">
