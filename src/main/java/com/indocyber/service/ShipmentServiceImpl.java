@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -47,5 +48,15 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public void deleteShipment(int id) {
         shipmentRepository.deleteById(id);
+    }
+
+    @Override
+    public Shipment getShipmentByName(String name) {
+        Optional<Shipment> shipment = shipmentRepository.findByName(name);
+        Shipment tempShipment = null;
+        if(shipment.isPresent()){
+            tempShipment = shipment.get();
+        }
+        return tempShipment;
     }
 }

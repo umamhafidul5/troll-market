@@ -15,7 +15,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("""
             SELECT tra
             FROM Transaction AS tra
-            WHERE (tra.merchandise.seller.username = :usernameSeller AND tra.buyer.username = :usernameBuyer)
+            WHERE (tra.merchandise.seller.username LIKE %:usernameSeller% 
+            AND tra.buyer.username LIKE %:usernameBuyer%)
             """)
     List<Transaction> searchTransaction(@Param("usernameSeller") String usernameSeller,
                                         @Param("usernameBuyer") String usernameBuyer);

@@ -1,9 +1,13 @@
 
 const tambahDana = document.querySelector(".tambah-dana");
+const addToCart = document.querySelectorAll(".addToCart");
+
 
 const popUp = document.querySelector(".pop-up");
+const popUp2 = document.querySelector(".pop-up2");
 
 const batal = document.querySelector(".batal");
+const batal2 = document.querySelector(".batal2");
 
 let object;
 
@@ -21,6 +25,47 @@ if (tambahDana != null) {
     })
 }
 
+if (addToCart != null) {
+    addToCart.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault()
+            const link = btn.parentElement.href;
+            const idMerchandise = link.substring(link.indexOf("=") + 1,  link.length);
+
+            document.querySelector(".id-merchandise").value = idMerchandise;
+            popUp2.classList.add("show");
+        })
+
+    })
+
+}
+
+//if (addToCart != null) {
+//    addToCart.addEventListener("click", (event) => {
+//        event.preventDefault()
+//        const link = addToCart.parentElement.href;
+//        const link = "http://localhost:8080/shop/addToCart2";
+//        const link = "/shop/addToCart2"
+//        popUp2.classList.add("show");
+//
+//        let data = {
+//            "id": 4,
+//            "quantity": 5,
+//            "shipment": "JNE"
+//        }
+//
+//        const submit = document.querySelector(".submit");
+//
+//        submit.addEventListener("click", () => {
+//            fetchPost(link, data);
+//            console.log(data);
+//            console.log(link);
+//        })
+//
+//    })
+//}
+
+
 if (batal != null) {
     batal.addEventListener("click", () => {
         console.log("click");
@@ -28,21 +73,29 @@ if (batal != null) {
     })
 }
 
+if (batal2 != null) {
+    batal2.addEventListener("click", () => {
+        console.log("click");
+        popUp2.classList.remove("show");
+    })
+}
+
 
 
 if (info != null) {
     info.forEach(i => {
-        i.addEventListener("click", ()=>{
-            fetchInfo(i.value);
+        i.addEventListener("click", (event)=>{
+            event.preventDefault();
+            fetchInfo(i.parentElement.href);
         })//fetchInfo(i.value))
     })
-
 }
 
-async function fetchInfo (id){
+async function fetchInfo (url){
     popUp.classList.add("show");
 
-    await fetch('http://localhost:8080/merchandise/infoProduct?id='+id)
+//    await fetch('http://localhost:8080/merchandise/infoProduct?id='+id)
+    await fetch(url)
             .then(response => response.json())
             .then(data => object = data)
 
@@ -50,5 +103,30 @@ async function fetchInfo (id){
     popUp.children[1].children[1].innerText = object.category;
     popUp.children[2].children[1].innerText = object.description;
     popUp.children[3].children[1].innerText = formatter.format(object.price);
-    popUp.children[4].children[1].innerText = object.isDiscontinue == true? "yes" : "no" ;
+
+    if (url.includes("merchandise")) {
+        popUp.children[4].children[1].innerText = object.isDiscontinue == true? "yes" : "no" ;
+    } else if (url.includes("shop")) {
+        popUp.children[4].children[1].innerText = object.seller.firstName + " " + object.seller.lastName ;
+    }
+
+}
+
+async function fetchPost (url, data){
+
+//    let data = new FormData();
+//        data.append("quantity", document.querySelector('.quantity').value);
+//        data.append("shipment", document.querySelector('.shipment').value);
+
+    await fetch(url, {
+          body: JSON.stringify(data),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset = UTF-8'
+          }
+    })
+
+//    .then(res => res.json())
+//        .then(teks => console.log(teks))
+//        .catch(err => console.log(err));
 }

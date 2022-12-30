@@ -13,4 +13,6 @@ public interface ShipmentService {
     void updateShipment(Shipment shipment);
 
     void deleteShipment(int id);
+
+    Shipment getShipmentByName(String name);
 }

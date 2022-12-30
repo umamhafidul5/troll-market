@@ -70,8 +70,8 @@
                                 <input type="button" value="Delete">
                             </a>
 
-                            <a>
-                                <Button class="info pointer" th:value="${d.id}">Info</Button>
+                            <a th:href="@{http://localhost:8080/merchandise/infoProduct(id=${d.id})}">
+                                <input class="info" type="button" value="Info">
                             </a>
 
                             <a th:href="@{/merchandise/discontinue(id=${d.id})}">

@@ -1,6 +1,5 @@
 package com.indocyber.controller.mvc;
 
-import com.indocyber.entity.Account;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +20,10 @@ public class HistoryController {
     private AccountService accountService;
 
     @GetMapping("/index")
-    public String index(Model model){
+    public String index(@RequestParam(name = "usernameSeller", required = false, defaultValue = "") String usernameSeller,
+                        @RequestParam(name = "usernameBuyer", required = false, defaultValue = "") String usernameBuyer,
+                        Model model){
 
-        model.addAttribute("transactionList", transactionService.getAllTransactionList());
-        model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
-        model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
-        model.addAttribute("account", accountService.getAccount());
-
-        return "history-page";
-    }
-
-    @GetMapping("/searchHistory")
-    public String searchHistory(@RequestParam(name = "usernameSeller", required = false, defaultValue = "") String usernameSeller,
-                                @RequestParam(name = "usernameBuyer", required = false, defaultValue = "") String usernameBuyer, Model model){
         model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
         model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
@@ -41,4 +31,5 @@ public class HistoryController {
 
         return "history-page";
     }
+
 }

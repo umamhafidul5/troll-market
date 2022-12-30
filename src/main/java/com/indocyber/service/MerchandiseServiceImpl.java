@@ -33,6 +33,11 @@ public class MerchandiseServiceImpl implements MerchandiseService {
     }
 
     @Override
+    public List<Merchandise> searchMerchandises(String name, String category, String description) {
+        return merchandiseRepository.searchMerchandises(name, category, description);
+    }
+
+    @Override
     public List<Merchandise> getAllMerchandise() {
         return merchandiseRepository.findAll();
     }

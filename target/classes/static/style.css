@@ -451,7 +451,7 @@ input[type='submit']{
     margin-bottom: 10px;
 }
 
-.pop-up {
+.pop-up, .pop-up2 {
     position: absolute;
     top: 35%;
     align-self: center;
