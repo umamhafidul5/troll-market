@@ -1,13 +1,18 @@
 package com.indocyber.service;
 
 import com.indocyber.entity.Account;
+import com.indocyber.entity.CartMerchandise;
 import com.indocyber.entity.Transaction;
 import com.indocyber.repository.AccountRepository;
+import com.indocyber.repository.CartMerchandiseRepository;
 import com.indocyber.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +24,19 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final AccountRepository accountRepository;
 
+    private final AccountService accountService;
+
+    private final CartService cartService;
+
+    private final CartMerchandiseRepository cartMerchandiseRepository;
+
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService, CartService cartService, CartMerchandiseRepository cartMerchandiseRepository) {
         this.transactionRepository = transactionRepository;
         this.accountRepository = accountRepository;
+        this.accountService = accountService;
+        this.cartService = cartService;
+        this.cartMerchandiseRepository = cartMerchandiseRepository;
     }
 
     @Override
@@ -48,5 +62,47 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer) {
         return transactionRepository.searchTransaction(usernameSeller, usernameBuyer);
+    }
+
+    @Override
+    public void putCartToTransaction() {
+        // Mengurangi saldo buyer
+        Account account = accountService.getAccount();
+        account.setBalance(account.getBalance().subtract(cartService.countTotalPriceIncludeShipment()));
+        accountService.saveBuyer(account);
+        // -----
+
+
+        // Menambah saldo penjual
+        List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+            Account sellerAccount = accountRepository.findById(cartMerchandise.getMerchandise().getSeller().getUsername()).orElseThrow();
+            BigDecimal totalPrice = (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice());
+            sellerAccount.setBalance(sellerAccount.getBalance().add(totalPrice));
+            accountService.saveBuyer(sellerAccount);
+        }
+        // -----
+
+
+        // Membuat transaction tiap barang
+        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+            transactionRepository.save(new Transaction(
+                    LocalDate.now(),
+                    cartMerchandise.getMerchandise(),
+                    cartMerchandise.getMerchandise().getName(),
+                    cartMerchandise.getQuantity(),
+                    cartMerchandise.getShipment(),
+                    (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice()),
+                    accountService.getAccount()
+            ));
+        }
+        // -----
+
+
+        // Menghapus CartMerchandise pembeli
+        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+            cartMerchandiseRepository.deleteById(cartMerchandise.getId());
+        }
+        // -----
     }
 }

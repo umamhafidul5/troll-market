@@ -14,4 +14,5 @@ public interface TransactionService {
     Account findById(String username);
 
     List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer);
+    void putCartToTransaction();
 }
