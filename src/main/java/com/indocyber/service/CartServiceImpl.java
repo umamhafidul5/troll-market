@@ -20,14 +20,13 @@ public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
     private final CartMerchandiseRepository cartMerchandiseRepository;
-
-    private final TransactionService transactionService;
+    @Autowired
+    private TransactionService transactionService;
 
     @Autowired
-    public CartServiceImpl(CartRepository cartRepository, CartMerchandiseRepository cartMerchandiseRepository, TransactionService transactionService) {
+    public CartServiceImpl(CartRepository cartRepository, CartMerchandiseRepository cartMerchandiseRepository) {
         this.cartRepository = cartRepository;
         this.cartMerchandiseRepository = cartMerchandiseRepository;
-        this.transactionService = transactionService;
     }
 
     @Override

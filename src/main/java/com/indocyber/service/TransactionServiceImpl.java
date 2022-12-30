@@ -20,24 +20,24 @@ import java.util.Optional;
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
 
-    private final TransactionRepository transactionRepository;
-
-    private final AccountRepository accountRepository;
-
-    private final AccountService accountService;
-
-    private final CartService cartService;
-
-    private final CartMerchandiseRepository cartMerchandiseRepository;
-
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService, CartService cartService, CartMerchandiseRepository cartMerchandiseRepository) {
-        this.transactionRepository = transactionRepository;
-        this.accountRepository = accountRepository;
-        this.accountService = accountService;
-        this.cartService = cartService;
-        this.cartMerchandiseRepository = cartMerchandiseRepository;
-    }
+    private TransactionRepository transactionRepository;
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private CartMerchandiseRepository cartMerchandiseRepository;
+
+
+//    @Autowired
+//    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService, CartMerchandiseRepository cartMerchandiseRepository) {
+//        this.transactionRepository = transactionRepository;
+//        this.accountRepository = accountRepository;
+//        this.accountService = accountService;
+//        this.cartMerchandiseRepository = cartMerchandiseRepository;
+//    }
+    public TransactionServiceImpl() {}
 
     @Override
     public List<Transaction> getTransactionsByAccount(Account account) {
@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
     public void putCartToTransaction() {
         // Mengurangi saldo buyer
         Account account = accountService.getAccount();
-        account.setBalance(account.getBalance().subtract(cartService.countTotalPriceIncludeShipment()));
+        account.setBalance(account.getBalance().subtract(countTotalPriceIncludeShipment()));
         accountService.saveBuyer(account);
         // -----
 
@@ -104,5 +104,14 @@ public class TransactionServiceImpl implements TransactionService {
             cartMerchandiseRepository.deleteById(cartMerchandise.getId());
         }
         // -----
+    }
+
+    public BigDecimal countTotalPriceIncludeShipment() {
+        List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        BigDecimal totalPrice = new BigDecimal(0);
+        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+            totalPrice = (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice());
+        }
+        return totalPrice;
     }
 }
