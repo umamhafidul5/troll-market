@@ -1,11 +1,18 @@
 package com.indocyber.dto;
 
+import com.indocyber.validation.Price;
+
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ShipmentDto {
     private int id;
+    @NotBlank(message = "Name is required!")
+    @NotNull(message = "Name is required!")
     private String name;
+    @Price(message = "Price is required!")
     private BigDecimal price;
     private boolean service;
 

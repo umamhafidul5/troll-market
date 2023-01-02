@@ -4,14 +4,18 @@
 </head>
 <body>
     <div class="container">
-        <div class="title">
+        <div class="title no-margin">
             <h2>Troll-Market</h2>
         </div>
 
         <div class="wrapper">
             <!-- Check for login error -->
-            <div th:if="${param.error}" class="error">
-                Invalid username, Password or Role
+<!--            <div th:if="${param.error}" class="error">-->
+<!--                Invalid username, password, or role-->
+<!--            </div>-->
+
+            <div th:text="${session.SPRING_SECURITY_LAST_EXCEPTION?.message}"
+                 class="error">
             </div>
 
             <!-- Check for logout -->

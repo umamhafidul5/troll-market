@@ -129,4 +129,15 @@ async function fetchPost (url, data){
 //    .then(res => res.json())
 //        .then(teks => console.log(teks))
 //        .catch(err => console.log(err));
+    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
+}
+
+
+if (window.location.href === "http://localhost:8080/shipment/add" ||
+    window.location.href === "http://localhost:8080/profile/top-up"
+
+) {
+
+    popUp.classList.add("show");
+
 }

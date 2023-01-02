@@ -2,6 +2,7 @@ package com.indocyber.service;
 
 import com.indocyber.dto.RegisterAdminDto;
 import com.indocyber.dto.RegisterDto;
+import com.indocyber.dto.TopUpDto;
 import com.indocyber.entity.Account;
 import com.indocyber.entity.Cart;
 import com.indocyber.repository.AccountRepository;
@@ -115,6 +116,12 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     @Override
     public List<Account> getAccountsByRole(String role) {
         return accountRepository.getAccountsByRole(role);
+    }
+
+    @Override
+    public void topUp(Account buyer, TopUpDto topUp) {
+        buyer.setBalance(buyer.getBalance().add(topUp.getAmountTopUp()));
+        accountRepository.save(buyer);
     }
 
     @Override
