@@ -315,6 +315,7 @@ tbody tr:nth-child(odd) {
     top: -17px;
     left: 152px;
     font-size: .7em;
+    width: 100%;
 }
 
 .big-font {
@@ -377,6 +378,18 @@ input[type='submit']{
 
 .l {
     left: 100px;
+}
+
+.l120 {
+    left: 120px;
+}
+
+.l170 {
+    left: 170px;
+}
+
+.l0 {
+    left: 0;
 }
 
 .l-r {
@@ -470,4 +483,16 @@ input[type='submit']{
 
 .landscape {
     padding: 20px 80px;
+}
+
+.align-left {
+    align-items: flex-start;
+}
+
+.note {
+    font-size: .6em;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0;
 }

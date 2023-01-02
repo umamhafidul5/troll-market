@@ -6,13 +6,18 @@
     <div class="column">
 
         <div class="pop-up border">
-            <form th:action="@{/profile/top-up}" method="post">
-                <div class="column">
-                    <label class="margin-bottom">Tambah dana sebesar:</label>
-                    <input class="margin-bottom" name="topUp" type="number" min="10000" step="500">
+            <form th:action="@{/profile/top-up}" method="post" th:object="${topUp}">
+                <div class="input-data align-left column no-margin-bottom">
+                    <label class="margin-bottom left">Tambah dana sebesar:</label>
+                    <div class="error-input l0" th:errors="*{amountTopUp}"></div>
+                    <input th:field="*{amountTopUp}"
+                           class="no-margin-bottom" name="topUp"
+                           type="number"
+                           step="500"
+                           placeholder="Rp 0">
                 </div>
 
-                <div class="input-data right no-margin">
+                <div class="input-data center">
                     <a>
                         <input type="submit" value="Tambah">
                     </a>

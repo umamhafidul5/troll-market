@@ -46,7 +46,6 @@ public class AdminController {
 
         if (bindingResult.hasErrors()) {
 
-            bindingResult.getAllErrors().forEach(System.out::println);
             model.addAttribute("account", accountService.getAccount());
 
             return "admin-page";

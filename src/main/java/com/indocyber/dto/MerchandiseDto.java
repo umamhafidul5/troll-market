@@ -1,5 +1,7 @@
 package com.indocyber.dto;
 
+import com.indocyber.validation.Price;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -8,15 +10,16 @@ public class MerchandiseDto {
 
     private int id;
 
-    @NotNull
+    @NotNull(message = "Name is required!")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Category is required!")
     private String category;
 
-    @NotNull
+    @NotNull(message = "Description is required!")
     private String description;
 
+    @Price(message = "Price is required")
     private BigDecimal price;
 
     private boolean isDiscontinue;

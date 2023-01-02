@@ -37,6 +37,7 @@
             </div>
 
         </div>
+        
         <div class="main">
             <header th:replace="~{home-page :: header}"></header>
             <nav th:replace="~{home-page :: nav}"></nav>
@@ -75,7 +76,7 @@
                             </a>
 
                             <a th:href="@{/merchandise/discontinue(id=${d.id})}">
-                                <input type="button" value="Discontinue">
+                                <input th:disabled="${d.isDiscontinue}" type="button" value="Discontinue">
                             </a>
 
                         </td>

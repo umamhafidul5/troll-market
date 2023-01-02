@@ -18,21 +18,22 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{username}"></div>
+                    <div class="error-input l170" th:errors="*{username}"></div>
                     <label class="column2hf">Username</label>
                     <input type="text" th:field="*{username}" placeholder="Username" />
                 </div>
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{password}"></div>
+<!--                    <div class="error-input l170" th:errors="${admin}"></div>-->
+                    <div class="error-input l170" th:errors="*{password}"></div>
                     <label class="column2hf">Password</label>
                     <input type="password" th:field="*{password}" placeholder="Password" />
                 </div>
 
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="${account}"></div>
-                    <div class="error-input" th:errors="*{passwordConfirmation}"></div>
+                    <div class="error-input l170" th:errors="${admin}"></div>
+<!--                    <div class="error-input l170" th:errors="*{passwordConfirmation}"></div>-->
                     <label class="column2hf">Confirm Password</label>
                     <input type="password" th:field="*{passwordConfirmation}" placeholder="Password Confirmation" />
                 </div>

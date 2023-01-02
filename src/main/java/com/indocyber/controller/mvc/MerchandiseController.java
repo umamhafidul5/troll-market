@@ -72,8 +72,9 @@ public class MerchandiseController {
                               BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(System.out::println);
+
             model.addAttribute("account", accountService.getAccount());
+            model.addAttribute("add", true);
 
             return "add-merchandise-page";
         }
@@ -93,8 +94,11 @@ public class MerchandiseController {
     @GetMapping("/discontinue")
     public String discontinue(@RequestParam("id") int id){
         Merchandise merchandise = merchandiseService.findById(id);
-        merchandise.setIsDiscontinue(true);
-        merchandiseService.saveMerchandise(merchandise);
+        if (!merchandise.getIsDiscontinue()) {
+            merchandise.setIsDiscontinue(true);
+            merchandiseService.saveMerchandise(merchandise);
+        }
+
         return "redirect:/merchandise/index";
     }
 

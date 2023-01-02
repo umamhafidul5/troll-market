@@ -3,27 +3,22 @@
 <head th:replace="~{home-page :: head}">
 </head>
 <body>
-    <div class="main">
-        <header th:replace="~{home-page :: header}"></header>
-        <nav th:replace="~{home-page :: nav}"></nav>
-        <div class="top">
-            <span>Shipment</span>
-        </div>
+    <div class="column">
         <div class="pop-up border">
             <form th:action="@{/shipment/add}" method="post" th:object="${shipmentDto}">
-                <div class="column">
-                    <label class="margin-bottom">Name</label>
-                    <input class="margin-bottom" type="text" th:field="*{name}">
-<!--                    <input class="margin-bottom" name="topUp" type="number" min="10000" step="500">-->
+                <div class="input-data left">
+                    <div class="error-input l120" th:errors="*{name}"></div>
+                    <label class="column2">Name</label>
+                    <input type="text" th:field="*{name}">
                 </div>
-                <div class="column">
-                    <label class="margin-bottom">Price</label>
-                    <input class="margin-bottom" th:field="*{price}" type="number" min="10000" step="500">
+                <div class="input-data left">
+                    <div class="error-input l120" th:errors="*{price}"></div>
+                    <label class="column2">Price</label>
+                    <input th:field="*{price}" type="number">
                 </div>
-                <div class="column">
-                    <label class="margin-bottom">Service</label>
-                    <input type="checkbox" name="service" th:field="*{service}">
-<!--                    <input class="margin-bottom" name="topUp" type="number" min="10000" step="500">-->
+                <div class="input-data left">
+                    <label class="column2">Service</label>
+                    <input class="pointer" type="checkbox" name="service" th:field="*{service}">
                 </div>
 
                 <div class="input-data right no-margin">
@@ -37,49 +32,60 @@
                 </div>
             </form>
         </div>
-        <div class="border">
-            <div>
+
+
+        <div class="main">
+            <header th:replace="~{home-page :: header}"></header>
+            <nav th:replace="~{home-page :: nav}"></nav>
+            <div class="top">
+                <span>Shipment</span>
+            </div>
+
+            <div class="border">
                 <div>
-                    <a class="tambah-dana margin-bottom"><button>Add New Shipment</button></a>
+                    <div>
+                        <a class="tambah-dana margin-bottom">
+                            <input type="button" value="Add New Shipment">
+                        </a>
+                    </div>
+                    <div th:if="${param.stopSuccess}" th:text="${'Shipment ' + service + ' sudah distop.'}"></div>
+                    <div th:if="${param.deletion}" th:text="${'Shipment ' + deletedName + ' sudah didelete.'}"></div>
+                    <table class="table button-in-table">
+                        <thead>
+                        <tr>
+                            <th class="bottom-border-none left-border-none top-border-none no-background-color"></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Service</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="shipment : ${shipmentList}">
+                            <td class="bottom-border-none left-border-none top-border-none no-background-color">
+                                <a th:href="@{/shipment/edit(id=${shipment.id})}">
+                                    <input type="button" value="Edit">
+                                </a>
+
+                                <a th:href="@{/shipment/delete(id=${shipment.id})}">
+                                    <input type="button" value="Delete">
+                                </a>
+
+                                <a th:href="@{/shipment/stopService(id=${shipment.id})}">
+                                    <input th:disabled="${!shipment.service}" type="button" value="Stop Service">
+                                </a>
+
+                            </td>
+                            <td th:text="${shipment.name}"></td>
+                            <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 0, 'COMMA')}"></td>
+                            <td th:text="${shipment.service == true} ? 'Yes' : 'No'"></td>
+                        </tr>
+                        <tr th:unless="${shipmentList.size() > 0}">
+                            <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>
+                            <td class="no-data-found" th:colspan="3">No Data Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div th:if="${param.stopSuccess}" th:text="${'Shipment ' + service + ' sudah distop.'}"></div>
-                <div th:if="${param.deletion}" th:text="${'Shipment ' + deletedName + ' sudah didelete.'}"></div>
-                <table class="table button-in-table">
-                    <thead>
-                    <tr>
-                        <th class="bottom-border-none left-border-none top-border-none no-background-color"></th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Service</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="shipment : ${shipmentList}">
-                        <td class="bottom-border-none left-border-none top-border-none no-background-color">
-                            <form method="post" th:action="@{/shipment/edit}">
-                                <input type="hidden" name="id" th:value="${shipment.id}">
-                                <button type="submit">Edit</button>
-                            </form>
-                            <form method="post" th:action="@{/shipment/delete}">
-                                <input type="hidden" name="id" th:value="${shipment.id}">
-                                <button type="submit">Delete</button>
-                            </form>
-                            <form method="post" th:action="@{/shipment/stopService}">
-                                <input type="hidden" name="id" th:value="${shipment.id}">
-                                <button th:if="${shipment.service == true}" type="submit">Stop Service</button>
-                                <button th:if="${shipment.service == false}" disabled>Stop Service</button>
-                            </form>
-                        </td>
-                        <td th:text="${shipment.name}"></td>
-                        <td th:text="${'Rp ' + #numbers.formatDecimal(shipment.price, 3, 'POINT', 0, 'COMMA')}"></td>
-                        <td th:text="${shipment.service == true} ? 'Yes' : 'No'"></td>
-                    </tr>
-                    <tr th:unless="${shipmentList.size() > 0}">
-                        <td class="bottom-border-none left-border-none top-border-none no-background-color"></td>
-                        <td class="no-data-found" th:colspan="3">No Data Found</td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
