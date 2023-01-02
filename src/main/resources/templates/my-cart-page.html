@@ -12,18 +12,13 @@
         <div class="border">
             <div>
                 <div>
-<<<<<<< HEAD
+
                     <div th:if="${param.insufficient}">Saldo anda tidak mencukupi untuk membeli semua barang di Cart.</div>
-                    <form method="post" th:action="@{/myCart/purchase}">
 
-
-                    </form>
-                    <a th:href="@{/myCart/purchase}" class="margin-bottom"><button>Purchase All</button></a>
-=======
-                    <a th:href="@{/}" class="margin-bottom">
-                        <input type="button" value="Add To Cart">
+                    <a th:href="@{/myCart/purchase}" class="margin-bottom">
+                        <input type="button" value="Purchase All">
                     </a>
->>>>>>> 444ed5b (menambahkan validasi)
+
                 </div>
                 <table class="table button-in-table1">
                     <thead>
