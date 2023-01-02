@@ -71,4 +71,9 @@ public class AccountController {
         return "register-page";
     }
 
+    @GetMapping("/accessDenied")
+    public String accessDenied() {
+        return "access-denied";
+    }
+
 }

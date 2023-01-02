@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home-page :: head}">
+</head>
+<body>
+    <div class="main">
+        <header th:replace="~{home-page :: header}"></header>
+        <nav th:replace="~{home-page :: nav}"></nav>
+
+        <div class="top">
+            <span>Access Denied</span>
+        </div>
+
+        <div class="border">
+            <div class="wrapper none">
+                <h1>Sorry</h1>
+                <h3>Access Denied ✌</h3>
+                <div>
+                    <a class="btn-w" th:href="@{/}">
+                        <input type="button" value="Back">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
