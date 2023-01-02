@@ -23,7 +23,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public List<Shipment> getAllShipment() {
-        return shipmentRepository.findAll();
+        return shipmentRepository.getAllShipmentService();
     }
 
     @Override

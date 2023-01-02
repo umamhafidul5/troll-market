@@ -61,6 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer) {
+
         return transactionRepository.searchTransaction(usernameSeller, usernameBuyer);
     }
 

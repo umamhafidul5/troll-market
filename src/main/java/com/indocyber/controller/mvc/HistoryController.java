@@ -20,14 +20,14 @@ public class HistoryController {
     private AccountService accountService;
 
     @GetMapping("/index")
-    public String index(@RequestParam(name = "usernameSeller", required = false, defaultValue = "") String usernameSeller,
-                        @RequestParam(name = "usernameBuyer", required = false, defaultValue = "") String usernameBuyer,
+    public String index(@RequestParam(name = "seller", required = false, defaultValue = "") String usernameSeller,
+                        @RequestParam(name = "buyer", required = false, defaultValue = "") String usernameBuyer,
                         Model model){
 
-        model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
         model.addAttribute("buyerList", accountService.getAccountsByRole("Buyer"));
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
         model.addAttribute("account", accountService.getAccount());
+        model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
 
         return "history-page";
     }
