@@ -18,36 +18,34 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <div class="input-data">
-                    <div class="error-input" th:errors="*{id}"></div>
                     <input type="hidden" th:field="*{id}" placeholder="id" />
                 </div>
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{name}"></div>
+                    <div class="error-input l120" th:errors="*{name}"></div>
                     <label class="column2">Name</label>
                     <input type="text" th:field="*{name}" placeholder="Product Name" />
                 </div>
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{category}"></div>
+                    <div class="error-input l120" th:errors="*{category}"></div>
                     <label class="column2">Category</label>
                     <input type="text" th:field="*{category}" placeholder="Category" />
                 </div>
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{description}"></div>
+                    <div class="error-input l120" th:errors="*{description}"></div>
                     <label class="column2">Description</label>
                     <textarea th:field="*{description}" placeholder="Description"></textarea>
                 </div>
 
                 <div class="input-data left">
-                    <div class="error-input" th:errors="*{price}"></div>
+                    <div class="error-input l120" th:errors="*{price}"></div>
                     <label class="column2">Price</label>
                     <input type="number" th:field="*{price}" placeholder="Price" />
                 </div>
 
                 <div th:if="${add}" class="input-data left">
-                    <div class="error-input" th:errors="*{isDiscontinue}"></div>
                     <label class="column2">Discontinue</label>
                     <input class="pointer" type="checkbox" id="isDiscontinue" th:field="*{isDiscontinue}" value="true">
                 </div>

@@ -1,21 +1,23 @@
 package com.indocyber.dto;
 
 import com.indocyber.validation.Compare;
+import com.indocyber.validation.RegisterAdminDtoPasswordMatcher;
 import com.indocyber.validation.UniqueUsername;
 
 import javax.validation.constraints.NotNull;
 
-@Compare(message="Password is not matched.", firstField="password", secondField="passwordConfirmation")
+@Compare(message="Confirm Password does not match!", firstField="password", secondField="passwordConfirmation")
+//@RegisterAdminDtoPasswordMatcher(message = "Confirm Password does not match!")
 public class RegisterAdminDto {
 
-    @NotNull
+    @NotNull(message = "Username is required!")
     @UniqueUsername(message = "Username already exists")
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password is required!")
     private String password;
 
-    @NotNull
+//    @NotNull(message = "Confirm Password is required!")
     private String passwordConfirmation;
 
     private String role;

@@ -4,6 +4,7 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Objects;
 
 public class CompareValidator implements ConstraintValidator<Compare, Object> {
 
@@ -18,13 +19,24 @@ public class CompareValidator implements ConstraintValidator<Compare, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
-        if(new BeanWrapperImpl(value).getPropertyValue(firstField) == null ||
-                new BeanWrapperImpl(value).getPropertyValue(secondField) == null){
+        BeanWrapperImpl beanWrapper = new BeanWrapperImpl(value);
+        if(beanWrapper.getPropertyValue(secondField) == null) {
+
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            constraintValidatorContext
+                    .buildConstraintViolationWithTemplate("Confirm Password is required!")
+                    .addConstraintViolation();
+
             return false;
-        }else {
-            String firstValue = new BeanWrapperImpl(value).getPropertyValue(firstField).toString();
-            String secondValue = new BeanWrapperImpl(value).getPropertyValue(secondField).toString();
+
+        } else if (beanWrapper.getPropertyValue(firstField) != null &&
+                beanWrapper.getPropertyValue(secondField) != null){
+
+            String firstValue = Objects.requireNonNull(beanWrapper.getPropertyValue(firstField)).toString();
+            String secondValue = Objects.requireNonNull(beanWrapper.getPropertyValue(secondField)).toString();
             return (firstValue.equals(secondValue));
         }
+
+        return true;
     }
 }
