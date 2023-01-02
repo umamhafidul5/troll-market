@@ -10,14 +10,16 @@
                 <div class="column">
                     <input name="idMerchandise" class="id-merchandise" type="hidden" th:field="*{id}">
                 </div>
-                <div class="column">
+                <div class="column margin-bottom">
+                    <div class="error-input l t" th:errors="*{quantity}"></div>
                     <label class="margin-bottom">Quantity:</label>
                     <input class="margin-bottom" name="quantity"
-                           type="number" th:field="*{quantity}" min="1" step="1">
+                           type="number" th:field="*{quantity}">
                 </div>
                 <div class="column">
-                    <label class="column2 ">Shipment</label>
-                    <select name="shipment" class="shipment">
+                    <div class="error-input l t" th:errors="*{shipment}"></div>
+                    <label class="margin-bottom">Shipment</label>
+                    <select th:field="*{shipment}" name="shipment" class="shipment">
                         <option value=''>Select</option>
                         <option th:each="option : ${shipmentList}"
                                 th:value="${option.name}"

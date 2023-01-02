@@ -2,7 +2,6 @@ package com.indocyber.dto;
 
 import com.indocyber.validation.Price;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 

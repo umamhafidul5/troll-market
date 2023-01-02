@@ -72,7 +72,9 @@ public class AccountController {
     }
 
     @GetMapping("/accessDenied")
-    public String accessDenied() {
+    public String accessDenied(Model model) {
+
+        model.addAttribute("account", accountService.getAccount());
         return "access-denied";
     }
 

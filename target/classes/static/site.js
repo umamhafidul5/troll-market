@@ -141,3 +141,7 @@ if (window.location.href === "http://localhost:8080/shipment/add" ||
     popUp.classList.add("show");
 
 }
+
+if (window.location.href === "http://localhost:8080/shop/addToCart") {
+    popUp2.classList.add("show");
+}
