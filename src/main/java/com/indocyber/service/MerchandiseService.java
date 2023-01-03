@@ -1,6 +1,7 @@
 package com.indocyber.service;
 
 import com.indocyber.dto.MerchandiseDto;
+import com.indocyber.entity.Account;
 import com.indocyber.entity.Merchandise;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface MerchandiseService {
     List<Merchandise> searchMerchandises(String name, String category, String description);
 
     List<Merchandise> getAllMerchandise();
+
+    List<Merchandise> getMerchandiseSeller(Account seller);
 
     void saveProduct (MerchandiseDto merchandiseDto);
 

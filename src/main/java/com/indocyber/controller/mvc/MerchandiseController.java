@@ -1,6 +1,7 @@
 package com.indocyber.controller.mvc;
 
 import com.indocyber.dto.MerchandiseDto;
+import com.indocyber.entity.Account;
 import com.indocyber.entity.Merchandise;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.MerchandiseService;
@@ -35,10 +36,12 @@ public class MerchandiseController {
     @RequestMapping("/index")
     public String index(Model model) {
 
-        model.addAttribute("merchandiseList",
-                merchandiseService.getAllMerchandise());
+        Account account = accountService.getAccount();
 
-        model.addAttribute("account", accountService.getAccount());
+        model.addAttribute("merchandiseList",
+                merchandiseService.getMerchandiseSeller(account));
+
+        model.addAttribute("account", account);
 
         return "merchandise-page";
     }

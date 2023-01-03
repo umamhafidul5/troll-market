@@ -43,29 +43,35 @@ public class MerchandiseServiceImpl implements MerchandiseService {
     }
 
     @Override
+    public List<Merchandise> getMerchandiseSeller(Account seller) {
+        return merchandiseRepository.getAllBySeller(seller);
+    }
+
+    @Override
     public void saveProduct(MerchandiseDto merchandiseDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Optional<Account> account = this.accountRepository.findById(authentication.getName());
-        Account account1 = account.get();
-        Merchandise merchandise = null;
+        Optional<Account> optAccount = this.accountRepository.findById(authentication.getName());
+        Account account = optAccount.get();
+        Merchandise merchandise = new Merchandise();
 //        boolean value = merchandiseDto.getIsDiscontinue().equals("1") ? true : false;
         if(merchandiseDto.getId() == 0){
-            merchandise = new Merchandise(account1, merchandiseDto.getName(),
-                    merchandiseDto.getCategory(), merchandiseDto.getDescription(), merchandiseDto.getPrice(),
-                    merchandiseDto.getIsDiscontinue());
-            merchandiseRepository.save(merchandise);
-        }else {
-            merchandise = merchandiseRepository.findById(merchandiseDto.getId()).get();
-            System.out.println(merchandiseDto.getId());
-            merchandise.setId(merchandiseDto.getId());
+            merchandise.setSeller(account);
             merchandise.setName(merchandiseDto.getName());
             merchandise.setCategory(merchandiseDto.getCategory());
             merchandise.setDescription(merchandiseDto.getDescription());
             merchandise.setPrice(merchandiseDto.getPrice());
             merchandise.setIsDiscontinue(merchandiseDto.getIsDiscontinue());
-            merchandise.setSeller(account1);
-            merchandiseRepository.save(merchandise);
+        }else {
+            Optional<Merchandise> optMerchandise= merchandiseRepository.findById(merchandiseDto.getId());
+            if(optMerchandise.isPresent()){
+                merchandise = optMerchandise.get();
+                merchandise.setName(merchandiseDto.getName());
+                merchandise.setCategory(merchandiseDto.getCategory());
+                merchandise.setDescription(merchandiseDto.getDescription());
+                merchandise.setPrice(merchandiseDto.getPrice());
+            }
         }
+        merchandiseRepository.save(merchandise);
     }
 
     @Override

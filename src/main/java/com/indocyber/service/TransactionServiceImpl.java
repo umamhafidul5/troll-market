@@ -78,7 +78,8 @@ public class TransactionServiceImpl implements TransactionService {
         List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         for(CartMerchandise cartMerchandise : cartMerchandiseList) {
             Account sellerAccount = accountRepository.findById(cartMerchandise.getMerchandise().getSeller().getUsername()).orElseThrow();
-            BigDecimal totalPrice = (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice());
+            BigDecimal totalPrice = (cartMerchandise.getMerchandise()
+                    .getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity())));
             sellerAccount.setBalance(sellerAccount.getBalance().add(totalPrice));
             accountService.saveBuyer(sellerAccount);
         }
@@ -111,7 +112,9 @@ public class TransactionServiceImpl implements TransactionService {
         List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         BigDecimal totalPrice = new BigDecimal(0);
         for(CartMerchandise cartMerchandise : cartMerchandiseList) {
-            totalPrice = (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice());
+            totalPrice = totalPrice.add((cartMerchandise.getMerchandise()
+                    .getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity())))
+                    .add(cartMerchandise.getShipment().getPrice()));
         }
         return totalPrice;
     }

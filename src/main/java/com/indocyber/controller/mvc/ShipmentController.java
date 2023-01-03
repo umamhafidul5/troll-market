@@ -1,6 +1,7 @@
 package com.indocyber.controller.mvc;
 
 import com.indocyber.dto.ShipmentDto;
+import com.indocyber.entity.Merchandise;
 import com.indocyber.entity.Shipment;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.ShipmentService;
@@ -43,7 +44,7 @@ public class ShipmentController {
         if(serviceName != null) {
             model.addAttribute("deletedName", serviceName);
         }
-        model.addAttribute("shipmentList", shipmentService.getAllShipment());
+        model.addAttribute("shipmentList", shipmentService.findAllShipment());
         return "shipment-page";
     }
 
@@ -94,7 +95,7 @@ public class ShipmentController {
             if(serviceName != null) {
                 model.addAttribute("deletedName", serviceName);
             }
-            model.addAttribute("shipmentList", shipmentService.getAllShipment());
+            model.addAttribute("shipmentList", shipmentService.findAllShipment());
 
             return "shipment-page";
         }
@@ -105,5 +106,13 @@ public class ShipmentController {
             System.out.println(e);
         }
         return "redirect:/shipment/index";
+    }
+
+    @GetMapping("/edit")
+    @ResponseBody
+    public ShipmentDto editShipment(@RequestParam("id") int id){
+        ShipmentDto shipmentDto = shipmentService.findById(id);
+        System.out.println(shipmentDto.isService());
+        return shipmentDto;
     }
 }

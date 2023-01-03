@@ -42,7 +42,7 @@ public class ShopController {
         model.addAttribute("merchandiseList", merchandiseService
                 .searchMerchandises(name, category, description));
 
-        model.addAttribute("shipmentList", shipmentService.getAllShipment());
+        model.addAttribute("shipmentList", shipmentService.getAllShipmentService());
 
         CartMerchandiseDto dto = new CartMerchandiseDto();
         model.addAttribute("cartMerchandise", dto);

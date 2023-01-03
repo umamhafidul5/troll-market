@@ -22,8 +22,13 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public List<Shipment> getAllShipment() {
+    public List<Shipment> getAllShipmentService() {
         return shipmentRepository.getAllShipmentService();
+    }
+
+    @Override
+    public List<Shipment> findAllShipment() {
+        return shipmentRepository.findAll();
     }
 
     @Override
@@ -34,9 +39,21 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public void saveShipment(ShipmentDto shipmentDto) {
         Shipment shipment = new Shipment();
-        shipment.setName(shipmentDto.getName());
-        shipment.setPrice(shipmentDto.getPrice());
-        shipment.setService(shipmentDto.isService());
+        if(shipmentDto.getId() == 0){
+            shipment.setName(shipmentDto.getName());
+            shipment.setPrice(shipmentDto.getPrice());
+            shipment.setService(shipmentDto.isService());
+
+        }else {
+            Optional<Shipment> optShipment = shipmentRepository.findById(shipmentDto.getId());
+            if(optShipment.isPresent()){
+                shipment = optShipment.get();
+//                shipment.setId(shipmentDto.getId());
+                shipment.setPrice(shipmentDto.getPrice());
+//                shipment.setName(shipmentDto.getName());
+//                shipment.setService(shipmentDto.isService());
+            }
+        }
         shipmentRepository.save(shipment);
     }
 
@@ -58,5 +75,19 @@ public class ShipmentServiceImpl implements ShipmentService {
             tempShipment = shipment.get();
         }
         return tempShipment;
+    }
+
+    @Override
+    public ShipmentDto findById(int id) {
+        Optional<Shipment> optShipment = shipmentRepository.findById(id);
+        ShipmentDto shipmentDto = new ShipmentDto();
+        if(optShipment.isPresent()){
+            Shipment shipment = optShipment.get();
+            shipmentDto.setId(shipment.getId());
+            shipmentDto.setName(shipment.getName());
+            shipmentDto.setPrice(shipment.getPrice());
+            shipmentDto.setService(shipment.isService());
+        }
+        return shipmentDto;
     }
 }
