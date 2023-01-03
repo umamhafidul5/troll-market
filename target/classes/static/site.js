@@ -1,6 +1,8 @@
 
 const tambahDana = document.querySelector(".tambah-dana");
 const addToCart = document.querySelectorAll(".addToCart");
+const edit = document.querySelectorAll(".edit");
+const addShipment = document.querySelector(".addShipment");
 
 
 const popUp = document.querySelector(".pop-up");
@@ -20,8 +22,16 @@ const info = document.querySelectorAll(".info");
 
 if (tambahDana != null) {
     tambahDana.addEventListener("click", () => {
-        console.log("click");
+
         popUp.classList.add("show");
+
+    })
+}
+
+if (addShipment != null) {
+    addShipment.addEventListener("click", () => {
+        popUp.classList.add("show");
+
     })
 }
 
@@ -38,6 +48,108 @@ if (addToCart != null) {
 
     })
 
+}
+
+if (batal != null) {
+    batal.addEventListener("click", () => {
+        console.log("click");
+        popUp.classList.remove("show");
+    })
+}
+
+if (batal2 != null) {
+    batal2.addEventListener("click", () => {
+        console.log("click");
+        popUp2.classList.remove("show");
+    })
+}
+
+
+
+if (info != null) {
+    info.forEach(i => {
+        i.addEventListener("click", (event)=>{
+            event.preventDefault();
+            fetchInfo(i.parentElement.href);
+        })//fetchInfo(i.value))
+    })
+}
+
+
+async function fetchInfo (url){
+    popUp.classList.add("show");
+
+    await fetch(url)
+            .then(response => response.json())
+            .then(data => object = data)
+
+    popUp.children[0].children[1].innerText = object.name;
+    popUp.children[1].children[1].innerText = object.category;
+    popUp.children[2].children[1].innerText = object.description;
+    popUp.children[3].children[1].innerText = formatter.format(object.price);
+
+    if (url.includes("merchandise")) {
+        popUp.children[4].children[1].innerText = object.isDiscontinue == true? "yes" : "no" ;
+    } else if (url.includes("shop")) {
+        popUp.children[4].children[1].innerText = object.seller.firstName + " " + object.seller.lastName ;
+    }
+
+}
+
+
+if (edit != null) {
+    edit.forEach(i => {
+        i.addEventListener("click", (event)=>{
+            event.preventDefault();
+            fetchEdit(i.parentElement.href);
+        })
+    })
+}
+
+async function fetchEdit (url){
+    popUp2.classList.add("show");
+
+    await fetch(url)
+            .then(response => response.json())
+            .then(data => object = data)
+
+    popUp2.children[0].children[1].children[1].value = object.id;
+    popUp2.children[0].children[2].children[1].value = object.name;
+    popUp2.children[0].children[3].children[1].value = object.price;
+    popUp2.children[0].children[4].children[1].checked = object.service;
+//    popUp.children[0].children[4].children[1].value = object.service;
+
+    popUp2.children[0].children[2].children[1].readOnly = true;
+    popUp2.children[0].children[4].children[1].disabled = true;
+
+}
+
+
+if (window.location.href === "http://localhost:8080/shipment/add" ||
+    window.location.href === "http://localhost:8080/profile/top-up"
+
+) {
+
+    popUp.classList.add("show");
+
+}
+
+
+
+
+
+
+if (window.location.href === "http://localhost:8080/shipment/add" ||
+    window.location.href === "http://localhost:8080/profile/top-up"
+
+) {
+
+    popUp.classList.add("show");
+
+}
+
+if (window.location.href === "http://localhost:8080/shop/addToCart") {
+    popUp2.classList.add("show");
 }
 
 //if (addToCart != null) {
@@ -65,83 +177,22 @@ if (addToCart != null) {
 //    })
 //}
 
-
-if (batal != null) {
-    batal.addEventListener("click", () => {
-        console.log("click");
-        popUp.classList.remove("show");
-    })
-}
-
-if (batal2 != null) {
-    batal2.addEventListener("click", () => {
-        console.log("click");
-        popUp2.classList.remove("show");
-    })
-}
-
-
-
-if (info != null) {
-    info.forEach(i => {
-        i.addEventListener("click", (event)=>{
-            event.preventDefault();
-            fetchInfo(i.parentElement.href);
-        })//fetchInfo(i.value))
-    })
-}
-
-async function fetchInfo (url){
-    popUp.classList.add("show");
-
-//    await fetch('http://localhost:8080/merchandise/infoProduct?id='+id)
-    await fetch(url)
-            .then(response => response.json())
-            .then(data => object = data)
-
-    popUp.children[0].children[1].innerText = object.name;
-    popUp.children[1].children[1].innerText = object.category;
-    popUp.children[2].children[1].innerText = object.description;
-    popUp.children[3].children[1].innerText = formatter.format(object.price);
-
-    if (url.includes("merchandise")) {
-        popUp.children[4].children[1].innerText = object.isDiscontinue == true? "yes" : "no" ;
-    } else if (url.includes("shop")) {
-        popUp.children[4].children[1].innerText = object.seller.firstName + " " + object.seller.lastName ;
-    }
-
-}
-
-async function fetchPost (url, data){
+//async function fetchPost (url, data){
 
 //    let data = new FormData();
 //        data.append("quantity", document.querySelector('.quantity').value);
 //        data.append("shipment", document.querySelector('.shipment').value);
-
-    await fetch(url, {
-          body: JSON.stringify(data),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json; charset = UTF-8'
-          }
-    })
-
+//    await fetch(url, {
+//          body: JSON.stringify(data),
+//          method: 'POST',
+//          headers: {
+//            'Content-Type': 'application/json; charset = UTF-8'
+//          }
+//    })
 //    .then(res => res.json())
 //        .then(teks => console.log(teks))
 //        .catch(err => console.log(err));
-    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
-}
-
-
-if (window.location.href === "http://localhost:8080/shipment/add" ||
-    window.location.href === "http://localhost:8080/profile/top-up"
-
-) {
-
-    popUp.classList.add("show");
-
-}
-
-if (window.location.href === "http://localhost:8080/shop/addToCart") {
-    popUp2.classList.add("show");
-}
+//    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
+//}
+//    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
+//}

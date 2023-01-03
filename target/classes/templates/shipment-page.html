@@ -7,14 +7,18 @@
         <div class="pop-up border">
             <form th:action="@{/shipment/add}" method="post" th:object="${shipmentDto}">
                 <div class="input-data left">
-                    <div class="error-input l120" th:errors="*{name}"></div>
-                    <label class="column2">Name</label>
-                    <input type="text" th:field="*{name}">
+                    <label class="column2"></label>
+                    <input type="hidden" th:field="*{id}">
                 </div>
                 <div class="input-data left">
-                    <div class="error-input l120" th:errors="*{price}"></div>
+                    <label class="column2">Name</label>
+                    <input type="text" th:field="*{name}">
+                    <div class="error-input l120" th:errors="*{name}"></div>
+                </div>
+                <div class="input-data left">
                     <label class="column2">Price</label>
                     <input th:field="*{price}" type="number">
+                    <div class="error-input l120" th:errors="*{price}"></div>
                 </div>
                 <div class="input-data left">
                     <label class="column2">Service</label>
@@ -32,6 +36,38 @@
                 </div>
             </form>
         </div>
+        <div class="pop-up2 border">
+            <form th:action="@{/shipment/add}" method="post" th:object="${shipmentDto}">
+                <div class="input-data left">
+                    <label class="column2"></label>
+                    <input type="hidden" th:field="*{id}">
+                </div>
+                <div class="input-data left">
+                    <label class="column2">Name</label>
+                    <input type="text" th:field="*{name}">
+                    <div class="error-input l120" th:errors="*{name}"></div>
+                </div>
+                <div class="input-data left">
+                    <label class="column2">Price</label>
+                    <input th:field="*{price}" type="number">
+                    <div class="error-input l120" th:errors="*{price}"></div>
+                </div>
+                <div class="input-data left">
+                    <label class="column2">Service</label>
+                    <input class="pointer" type="checkbox" name="service" th:field="*{service}">
+                </div>
+
+                <div class="input-data right no-margin">
+                    <a>
+                        <input type="submit" value="Edit">
+                    </a>
+
+                    <a>
+                        <input class="batal2" type="button" value="Batal">
+                    </a>
+                </div>
+            </form>
+        </div>
 
 
         <div class="main">
@@ -44,7 +80,7 @@
             <div class="border">
                 <div>
                     <div>
-                        <a class="tambah-dana margin-bottom">
+                        <a class="addShipment margin-bottom">
                             <input type="button" value="Add New Shipment">
                         </a>
                     </div>
@@ -63,7 +99,7 @@
                         <tr th:each="shipment : ${shipmentList}">
                             <td class="bottom-border-none left-border-none top-border-none no-background-color">
                                 <a th:href="@{/shipment/edit(id=${shipment.id})}">
-                                    <input type="button" value="Edit">
+                                    <input type="button" value="Edit" class="edit">
                                 </a>
 
                                 <a th:href="@{/shipment/delete(id=${shipment.id})}">

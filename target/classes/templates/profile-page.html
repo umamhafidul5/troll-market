@@ -85,7 +85,7 @@
                         <td th:text="${d.merchandiseName}"></td>
                         <td th:text="${d.quantity}"></td>
                         <td th:text="${d.shipment.name}"></td>
-                        <td th:text="${d.totalPrice}"></td>
+                        <td th:text="${'Rp ' + #numbers.formatDecimal(d.totalPrice, 3, 'POINT', 2, 'COMMA')}"></td>
                     </tr>
                     <tr th:unless="${transactionList.size() > 0}">
                         <td class="no-data-found" th:colspan="5">No Data Found</td>

@@ -64,7 +64,7 @@ public class ShopController {
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("account", accountService.getAccount());
-            model.addAttribute("shipmentList", shipmentService.getAllShipment());
+            model.addAttribute("shipmentList", shipmentService.getAllShipmentService());
             model.addAttribute("merchandiseList", merchandiseService
                     .searchMerchandises(name, category, description));
 

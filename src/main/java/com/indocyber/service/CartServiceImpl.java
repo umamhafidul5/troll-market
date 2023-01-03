@@ -53,7 +53,10 @@ public class CartServiceImpl implements CartService {
         List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         BigDecimal totalPrice = new BigDecimal(0);
         for(CartMerchandise cartMerchandise : cartMerchandiseList) {
-            totalPrice = (cartMerchandise.getMerchandise().getPrice().multiply(BigDecimal.valueOf(cartMerchandise.getQuantity()))).add(cartMerchandise.getShipment().getPrice());
+            totalPrice = totalPrice.add((cartMerchandise
+                    .getMerchandise().getPrice()
+                    .multiply(BigDecimal.valueOf(cartMerchandise.getQuantity())))
+                    .add(cartMerchandise.getShipment().getPrice()));
         }
         return totalPrice;
     }
