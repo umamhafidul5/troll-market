@@ -136,6 +136,22 @@ if (window.location.href === "http://localhost:8080/shipment/add" ||
 
 
 
+
+
+
+if (window.location.href === "http://localhost:8080/shipment/add" ||
+    window.location.href === "http://localhost:8080/profile/top-up"
+
+) {
+
+    popUp.classList.add("show");
+
+}
+
+if (window.location.href === "http://localhost:8080/shop/addToCart") {
+    popUp2.classList.add("show");
+}
+
 //if (addToCart != null) {
 //    addToCart.addEventListener("click", (event) => {
 //        event.preventDefault()
@@ -176,5 +192,7 @@ if (window.location.href === "http://localhost:8080/shipment/add" ||
 //    .then(res => res.json())
 //        .then(teks => console.log(teks))
 //        .catch(err => console.log(err));
+//    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
+//}
 //    popUp.children[4].children[1].innerText = object.isDiscontinue === true ? "yes" : "no" ;
 //}

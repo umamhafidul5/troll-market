@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="~{home-page :: head}">
 </head>
 <body>
@@ -56,7 +57,7 @@
                 <div class="input-data left">
                     <span class="column2">Balance</span>
                     <span th:text="${'Rp ' + #numbers.formatDecimal(account.balance, 3, 'POINT', 2, 'COMMA')}"></span>
-                    <a>
+                    <a sec:authorize="hasAuthority('Buyer')">
                         <input class="tambah-dana" type="button" value="Tambah dana">
                     </a>
                 </div>

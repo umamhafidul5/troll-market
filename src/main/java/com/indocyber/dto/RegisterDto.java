@@ -8,25 +8,24 @@ import javax.validation.constraints.NotNull;
 @Compare(message="Password is not matched.", firstField="password", secondField="passwordConfirmation")
 public class RegisterDto {
 
-    @NotNull
+    @NotNull(message = "Username is required!")
     @UniqueUsername(message = "Username already exists")
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password is required!")
     private String password;
 
-    @NotNull
     private String passwordConfirmation;
 
     private String role;
 
-    @NotNull
+    @NotNull(message = "Firstname is required!")
     private String firstName;
 
-    @NotNull
+    @NotNull(message = "Lastname is required!")
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Address is required!")
     private String address;
 
     public RegisterDto(){}
