@@ -33,7 +33,7 @@ public class MvcSecurityConfig {
                 .and()
                 .logout().permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/account/access-denied");
+                .exceptionHandling().accessDeniedPage("/account/accessDenied");
         return httpSecurity.build();
     };
 

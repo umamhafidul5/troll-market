@@ -71,4 +71,11 @@ public class AccountController {
         return "register-page";
     }
 
+    @GetMapping("/accessDenied")
+    public String accessDenied(Model model) {
+
+        model.addAttribute("account", accountService.getAccount());
+        return "access-denied";
+    }
+
 }

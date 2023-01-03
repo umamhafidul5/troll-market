@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -51,7 +54,23 @@ public class ShopController {
     }
 
     @RequestMapping("/addToCart")
-    public String addToCart(@ModelAttribute(name = "shipmentDto") CartMerchandiseDto dto) {
+    public String addToCart(@Valid @ModelAttribute(name = "cartMerchandise") CartMerchandiseDto dto,
+                            BindingResult bindingResult,
+                            Model model,
+                            @RequestParam(name = "name", required = false, defaultValue = "") String name,
+                            @RequestParam(name = "category", required = false, defaultValue = "") String category,
+                            @RequestParam(name = "description", required = false, defaultValue = "") String description) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("account", accountService.getAccount());
+            model.addAttribute("shipmentList", shipmentService.getAllShipment());
+            model.addAttribute("merchandiseList", merchandiseService
+                    .searchMerchandises(name, category, description));
+
+            return "shop-page";
+        }
+
         Account buyer = accountService.getAccount();
         cartMerchandiseService.saveCartMerchandise(dto, buyer);
         return "redirect:/shop/index";
