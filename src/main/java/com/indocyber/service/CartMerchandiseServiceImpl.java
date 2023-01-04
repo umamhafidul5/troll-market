@@ -6,6 +6,7 @@ import com.indocyber.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,17 +18,14 @@ public class CartMerchandiseServiceImpl implements CartMerchandiseService{
 
     private final MerchandiseRepository merchandiseRepository;
 
-    private final AccountRepository accountRepository;
-
     private final ShipmentRepository shipmentRepository;
 
 
     @Autowired
-    public CartMerchandiseServiceImpl(CartMerchandiseRepository cartMerchandiseRepository, CartRepository cartRepository, MerchandiseRepository merchandiseRepository, AccountRepository accountRepository, ShipmentRepository shipmentRepository) {
+    public CartMerchandiseServiceImpl(CartMerchandiseRepository cartMerchandiseRepository, CartRepository cartRepository, MerchandiseRepository merchandiseRepository, ShipmentRepository shipmentRepository) {
         this.cartMerchandiseRepository = cartMerchandiseRepository;
         this.cartRepository = cartRepository;
         this.merchandiseRepository = merchandiseRepository;
-        this.accountRepository = accountRepository;
         this.shipmentRepository = shipmentRepository;
     }
 
@@ -51,6 +49,15 @@ public class CartMerchandiseServiceImpl implements CartMerchandiseService{
 
     }
 
+    @Override
+    public List<CartMerchandise> getCartListByUsername(String username) {
+        return cartMerchandiseRepository.getCartListByUsername(username);
+    }
+
+    @Override
+    public void deleteCartMerchandise(int id) {
+        cartMerchandiseRepository.deleteById(id);
+    }
 
 
 }

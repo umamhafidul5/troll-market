@@ -14,7 +14,7 @@ import java.util.Optional;
 @Transactional
 public class ShipmentServiceImpl implements ShipmentService {
 
-    ShipmentRepository shipmentRepository;
+    private ShipmentRepository shipmentRepository;
 
     @Autowired
     public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {

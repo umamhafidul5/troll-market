@@ -49,20 +49,20 @@ public class CartServiceImpl implements CartService {
         return tempCart;
     }
 
-    public BigDecimal countTotalPriceIncludeShipment() {
-        List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        BigDecimal totalPrice = new BigDecimal(0);
-        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
-            totalPrice = totalPrice.add((cartMerchandise
-                    .getMerchandise().getPrice()
-                    .multiply(BigDecimal.valueOf(cartMerchandise.getQuantity())))
-                    .add(cartMerchandise.getShipment().getPrice()));
-        }
-        return totalPrice;
-    }
+//    public BigDecimal countTotalPriceIncludeShipment() {
+//        List<CartMerchandise> cartMerchandiseList = cartMerchandiseRepository.getCartListByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//        BigDecimal totalPrice = new BigDecimal(0);
+//        for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+//            totalPrice = totalPrice.add((cartMerchandise
+//                    .getMerchandise().getPrice()
+//                    .multiply(BigDecimal.valueOf(cartMerchandise.getQuantity())))
+//                    .add(cartMerchandise.getShipment().getPrice()));
+//        }
+//        return totalPrice;
+//    }
 
-    @Override
-    public void purchasingMerchandiseOnCart() {
-        transactionService.putCartToTransaction();
-    }
+//    @Override
+//    public void purchasingMerchandiseOnCart() {
+//        transactionService.putCartToTransaction();
+//    }
 }

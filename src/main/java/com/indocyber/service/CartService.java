@@ -15,7 +15,7 @@ public interface CartService {
 
     Cart findByBuyer(Account account);
 
-    BigDecimal countTotalPriceIncludeShipment();
-    void purchasingMerchandiseOnCart();
+//    BigDecimal countTotalPriceIncludeShipment();
+//    void purchasingMerchandiseOnCart();
 
 }
