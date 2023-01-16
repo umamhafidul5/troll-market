@@ -34,7 +34,6 @@ public class AccountController {
                                   BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println("sampe sini");
             bindingResult.getAllErrors().forEach(System.out::println);
             return "register-page";
         }

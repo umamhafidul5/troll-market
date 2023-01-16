@@ -1,5 +1,6 @@
 package com.indocyber.service;
 
+import com.indocyber.dto.TransactionViewDto;
 import com.indocyber.entity.Account;
 import com.indocyber.entity.CartMerchandise;
 import com.indocyber.entity.Transaction;
@@ -42,6 +43,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> getTransactionsByAccount(Account account) {
         return transactionRepository.getTransactionsByBuyer(account);
+    }
+
+    @Override
+    public List<TransactionViewDto> getTransactionsViewByAccount(Account account) {
+        return transactionRepository.getTransactionViewDtoByBuyer(account);
     }
 
     @Override
