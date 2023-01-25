@@ -11,6 +11,7 @@
             <span>Profile</span>
         </div>
 
+
         <div class="border">
             <form method="get" th:attr="action=@{/history/index}" >
                 <div class="input-data left">
@@ -44,6 +45,12 @@
         </div>
 
         <div class="border">
+            <div class="input-data">
+                <a th:href="@{/report/history-pdf}" target="_blank">
+                    <input type="button" value="Download History">
+                </a>
+
+            </div>
             <table class="table">
                 <thead>
                 <tr>

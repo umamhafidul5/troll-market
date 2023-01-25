@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/history")
 public class HistoryController {
@@ -19,6 +21,9 @@ public class HistoryController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private HttpSession session;
+
     @GetMapping("/index")
     public String index(@RequestParam(name = "seller", required = false, defaultValue = "") String usernameSeller,
                         @RequestParam(name = "buyer", required = false, defaultValue = "") String usernameBuyer,
@@ -28,6 +33,8 @@ public class HistoryController {
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
         model.addAttribute("account", accountService.getAccount());
         model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
+        session.setAttribute("seller", usernameSeller);
+        session.setAttribute("buyer", usernameBuyer);
 
         return "history-page";
     }
