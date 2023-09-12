@@ -9,6 +9,8 @@ import com.indocyber.entity.Shipment;
 import com.indocyber.service.AccountService;
 import com.indocyber.service.MerchandiseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/merchandise")
 public class MerchandiseRestController {
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    private void setData(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
+    }
+
+    private Object getData(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
 
     @Autowired
     private MerchandiseService merchandiseService;
@@ -95,6 +107,7 @@ public class MerchandiseRestController {
     }
 
     @GetMapping("/info/id={id}")
+    @Cacheable(value = "Merchandise", key = "#id")
     public ResponseEntity<Merchandise> infoMerchandise(@PathVariable("id") Integer id){
 
         Merchandise merchandise = merchandiseService.findById(id);

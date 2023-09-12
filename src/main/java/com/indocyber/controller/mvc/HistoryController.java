@@ -33,8 +33,11 @@ public class HistoryController {
         model.addAttribute("sellerList", accountService.getAccountsByRole("Seller"));
         model.addAttribute("account", accountService.getAccount());
         model.addAttribute("transactionList", transactionService.searchTransaction(usernameSeller,usernameBuyer));
+//        model.addAttribute("transactionList", null);
         session.setAttribute("seller", usernameSeller);
         session.setAttribute("buyer", usernameBuyer);
+
+        transactionService.searchTransaction(usernameSeller, usernameBuyer);
 
         return "history-page";
     }

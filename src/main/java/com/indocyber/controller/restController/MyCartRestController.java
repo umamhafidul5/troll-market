@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -43,7 +45,7 @@ public class MyCartRestController {
     }
 
     @GetMapping("/purchaseAll")
-    public ResponseEntity<String> purchaseAll (){
+    public ResponseEntity<String> purchaseAll () throws MessagingException, IOException {
 
         Account account = accountService.getAccount();
         if(account.getBalance().compareTo(transactionService.countTotalPriceIncludeShipment()) >= 0) {

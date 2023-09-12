@@ -1,11 +1,12 @@
 package com.indocyber.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Merchandise")
-public class Merchandise {
+public class Merchandise implements Serializable {
 
     @Id
     @Column(name = "Id")

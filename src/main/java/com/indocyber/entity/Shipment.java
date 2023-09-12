@@ -4,11 +4,12 @@ package com.indocyber.entity;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Shipment")
-public class Shipment {
+public class Shipment implements Serializable {
 
     @Id
     @Column(name = "Id")
@@ -63,4 +64,5 @@ public class Shipment {
     public void setService(boolean service) {
         this.service = service;
     }
+
 }

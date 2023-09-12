@@ -5,6 +5,8 @@ import com.indocyber.entity.Account;
 import com.indocyber.entity.Transaction;
 import org.springframework.data.domain.Page;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface TransactionService {
 
     List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer);
 
-    void putCartToTransaction();
+    void putCartToTransaction() throws MessagingException, IOException;
 
     BigDecimal countTotalPriceIncludeShipment();
 }

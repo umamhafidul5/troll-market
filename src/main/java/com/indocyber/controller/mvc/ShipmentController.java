@@ -45,6 +45,7 @@ public class ShipmentController {
             model.addAttribute("deletedName", serviceName);
         }
         model.addAttribute("shipmentList", shipmentService.findAllShipment());
+
         return "shipment-page";
     }
 

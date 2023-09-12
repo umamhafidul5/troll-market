@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Troll-Market" />
-        <module name="troll-market" />
       </profile>
     </annotationProcessing>
   </component>

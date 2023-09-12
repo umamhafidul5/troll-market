@@ -1,11 +1,12 @@
 package com.indocyber.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "Cart")
-public class Cart {
+public class Cart implements Serializable {
 
     @Id
     @Column(name = "Id")

@@ -8,12 +8,18 @@ import com.indocyber.repository.AccountRepository;
 import com.indocyber.repository.CartMerchandiseRepository;
 import com.indocyber.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +35,19 @@ public class TransactionServiceImpl implements TransactionService {
     private AccountService accountService;
     @Autowired
     private CartMerchandiseRepository cartMerchandiseRepository;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private EmailService emailService;
 
+    private void setData(String key, Object value) {
+//        redisTemplate.opsForValue().set(key, value);
+        redisTemplate.opsForValue().set(key, value);
+    }
+
+    private Object getData(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
 
 //    @Autowired
 //    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService, CartMerchandiseRepository cartMerchandiseRepository) {
@@ -66,13 +84,31 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+//    @CachePut(value = "dataList", key = "#usernameSeller + ':' + #usernameBuyer")
     public List<Transaction> searchTransaction(String usernameSeller, String usernameBuyer) {
+//        System.out.println("service");
+//        String key = "dataList" + usernameSeller + ":" + usernameBuyer;
+//        String key = usernameSeller + ":" + usernameBuyer;
+
+//        List<Transaction> dataList = (List<Transaction>) getData(key);
+//        List<Transaction> dataList = (List<Transaction>) getData("dataList:");
+
+
+//        System.out.println(dataList);
+
+//        if (dataList == null) {
+//
+//            dataList = transactionRepository.searchTransaction(usernameSeller, usernameBuyer);
+//            setData(key, dataList);
+//        }
+//        return dataList;
+
 
         return transactionRepository.searchTransaction(usernameSeller, usernameBuyer);
     }
 
     @Override
-    public void putCartToTransaction() {
+    public void putCartToTransaction() throws MessagingException, IOException {
         // Mengurangi saldo buyer
         Account account = accountService.getAccount();
         account.setBalance(account.getBalance().subtract(countTotalPriceIncludeShipment()));
@@ -94,6 +130,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         // Membuat transaction tiap barang
         for(CartMerchandise cartMerchandise : cartMerchandiseList) {
+
             transactionRepository.save(new Transaction(
                     LocalDate.now(),
                     cartMerchandise.getMerchandise(),
@@ -111,6 +148,12 @@ public class TransactionServiceImpl implements TransactionService {
         for(CartMerchandise cartMerchandise : cartMerchandiseList) {
             cartMerchandiseRepository.deleteById(cartMerchandise.getId());
         }
+
+        emailService.sendEmail("umamhafidul5@gmail.com", "Terima Kasih Sudah Berbelanja!", Arrays.toString(cartMerchandiseList.stream()
+                .map(s -> s.getId() +
+                        "|" + s.getMerchandise().getName()+
+                        "|" + (s.getMerchandise().getPrice().multiply(new BigDecimal(s.getQuantity()))))
+                .toArray()));
         // -----
     }
 

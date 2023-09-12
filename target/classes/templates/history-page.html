@@ -64,7 +64,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${transactionList.size() > 0}"
+                <tr th:if="${transactionList != null && transactionList.size() > 0}"
                     th:each="d : ${transactionList}">
                     <td th:text="${d.purchaseDate}"></td>
                     <td th:text="|${d.merchandise.seller.firstName} ${d.merchandise.seller.lastName}|"></td>
@@ -74,7 +74,7 @@
                     <td th:text="${d.shipment.name}"></td>
                     <td th:text="${'Rp ' + #numbers.formatDecimal(d.totalPrice, 3, 'POINT', 2, 'COMMA')}"></td>
                 </tr>
-                <tr th:unless="${transactionList.size() > 0}">
+                <tr th:unless="${transactionList != null && transactionList.size() > 0}">
                     <td class="no-data-found" th:colspan="7">No Data Found</td>
                 </tr>
                 </tbody>

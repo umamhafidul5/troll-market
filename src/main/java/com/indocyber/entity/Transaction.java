@@ -1,12 +1,13 @@
 package com.indocyber.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "TransactionTroll")
-public class Transaction {
+public class Transaction implements Serializable {
 
     @Id
     @Column(name = "Id")
