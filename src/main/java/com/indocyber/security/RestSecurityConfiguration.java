@@ -21,6 +21,9 @@ public class RestSecurityConfiguration {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    @Autowired
+    private RestCustomAuthenticationProvider provider;
+
     @Order(1)
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -37,7 +40,8 @@ public class RestSecurityConfiguration {
 
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .and().authenticationProvider(provider)
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
@@ -52,6 +56,7 @@ public class RestSecurityConfiguration {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder)
                 .and()
+                .authenticationProvider(provider)
                 .build();
     }
 }

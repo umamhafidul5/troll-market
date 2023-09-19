@@ -1,6 +1,7 @@
 package com.indocyber.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,19 @@ import java.util.Date;
 
 @Service
 public class JwtToken {
-    private String SECRET_KEY = "simsalabim";
-    private String audience = "kamu";
+
+    @Value("${secret.key}")
+    private String SECRET_KEY;
+
+    @Value("${audience}")
+    private String audience;
 
     private Claims getClaims(String token){
 
         JwtParser parser = Jwts.parser().setSigningKey(SECRET_KEY);
         Jws<Claims> signatureAndClaims = parser.parseClaimsJws(token);
-        Claims claims = signatureAndClaims.getBody();
 
-        return claims;
+        return signatureAndClaims.getBody();
     }
 
     public String getUsername(String token) {
@@ -34,6 +38,7 @@ public class JwtToken {
             String role,
             String audience) {
 
+
         JwtBuilder builder = Jwts.builder();
         builder = builder.setSubject(subject)
                 .claim("username", username)
@@ -41,7 +46,7 @@ public class JwtToken {
                 .setIssuer("http://localhost:8080")
                 .setAudience(audience)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + 6000000))
+                .setExpiration(new Date((new Date()).getTime() + 60000))
                 .signWith(SignatureAlgorithm.HS256, secretKey);
 
         return builder.compact();
@@ -53,6 +58,6 @@ public class JwtToken {
         String user = claims.get("username", String.class);
         String audience = claims.getAudience();
 
-        return (user.equals(userDetails.getUsername()) && audience.equals(audience));
+        return (user.equals(userDetails.getUsername()) && this.audience.equals(audience));
     }
 }

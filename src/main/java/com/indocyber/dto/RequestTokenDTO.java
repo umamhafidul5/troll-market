@@ -63,4 +63,16 @@ public class RequestTokenDTO {
     public void setAudience(String audience) {
         this.audience = audience;
     }
+
+    @Override
+    public String toString() {
+        return "RequestTokenDTO{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", subject='" + subject + '\'' +
+                ", secretKey='" + secretKey + '\'' +
+                ", audience='" + audience + '\'' +
+                '}';
+    }
 }

@@ -30,17 +30,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        // Get header called Authorization from a request
         String authorizationHeader = request.getHeader("Authorization");
         String username = null;
         String token = null;
 
         if (authorizationHeader != null) {
 
-            // Replace text "Bearer" with empty string
-            token = authorizationHeader.replace("Bearer", "");
+            token = authorizationHeader.replace("Bearer ", "");
 
-            // Get username from JWT token
             username = jwtToken.getUsername(token);
         }
 
@@ -56,12 +53,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                 null,
                                 userDetails.getAuthorities());
 
-//                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
+            System.out.println("APAKAH VALID: " + jwtToken.validateToken(token, userDetails));
+
         }
 
         filterChain.doFilter(request, response);
+        System.out.println("END");
+
     }
 }

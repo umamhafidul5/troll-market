@@ -1,14 +1,15 @@
 package com.indocyber;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 import java.io.IOException;
-import java.rmi.server.RMISocketFactory;
 
 @SpringBootApplication
 @EnableCaching
+@EnableEncryptableProperties
 public class TrollMarketApplication {
 
 	public static void main(String[] args) throws IOException {

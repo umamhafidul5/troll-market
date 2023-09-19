@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -57,58 +58,27 @@ public class AccountRestController {
     @PostMapping("/authenticate")
     public ResponseTokenDTO post(@RequestBody RequestTokenDTO dto) {
 
-        System.out.println(dto);
+        System.out.println(dto.toString());
 
-        List<String> role = userDetailsService.loadUserByUsername(dto.getUsername())
-                .getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+        GrantedAuthority role = dto::getRole;
 
-        if(role.contains(dto.getRole())){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(role);
 
-            try {
-                UsernamePasswordAuthenticationToken token =
-                        new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
-
-                // UsernamePasswordAuthenticationToken is passed into the AuthenticationManager to be authenticated
-                Authentication authentication = authenticationManager.authenticate(token);
-                System.out.println("Is authenticate: " + authentication.isAuthenticated());
-                Object thePrincipal = authentication.getPrincipal();
-                System.out.println("thePrincipal: " + thePrincipal);
-
-                ApplicationUserDetails applicationUserDetails = (ApplicationUserDetails) thePrincipal;
-                System.out.println("Username: " + applicationUserDetails.getUsername());
-                System.out.println("Password: " + applicationUserDetails.getPassword());
-                System.out.println("isAccountNonExpired: " + applicationUserDetails.isAccountNonExpired());
-                System.out.println("isAccountNonLocked: " + applicationUserDetails.isAccountNonLocked());
-                System.out.println("isEnabled: " + applicationUserDetails.isEnabled());
-                System.out.println("getAuthorities: " + applicationUserDetails.getAuthorities());
-
-                System.out.println("credentials: " + authentication.getCredentials());
-                System.out.println("name: " + authentication.getName());
-            } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can not authenticate", e);
-            }
-
-        }else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mismatched roles");
-        }
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword(), authorities);
 
 
+        authenticationManager.authenticate(token);
 
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(dto.getUsername());
-
-        //String role = accountService.getAccountRole(dto.getUsername());
-        String token = jwtToken.generateToken(
-                dto.getSubject(),
-                dto.getUsername(),
-                dto.getSecretKey(),
-//                role,
-                dto.getRole(),
-                dto.getAudience()
-        );
-
-        ResponseTokenDTO responseTokenDTO = new ResponseTokenDTO(dto.getUsername(), dto.getRole(), token);
-
-        return responseTokenDTO;
+        return new ResponseTokenDTO(dto.getUsername(), dto.getRole(),
+                jwtToken.generateToken(
+                        dto.getSubject(),
+                        dto.getUsername(),
+                        dto.getSecretKey(),
+                        dto.getRole(),
+                        dto.getAudience()
+                ));
     }
 
 }

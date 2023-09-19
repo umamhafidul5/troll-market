@@ -1,0 +1,4 @@
+com\indocyber\controller\restController\AccountRestController.class
+com\indocyber\controller\restController\MerchandiseRestController.class
+com\indocyber\controller\restController\HistoryRestController.class
+com\indocyber\controller\restController\AdminRestController.class
