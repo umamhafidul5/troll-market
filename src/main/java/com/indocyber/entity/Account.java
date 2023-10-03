@@ -7,6 +7,13 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * Hero is the main entity we'll be using to . . .
+ * Please see the {@link com.indocyber.entity.Account} class for true identity
+ * @author umamhafidul5
+ *
+ */
+
 @Entity
 @Table(name = "Account")
 public class Account implements Serializable {
@@ -32,6 +39,9 @@ public class Account implements Serializable {
 
     @Column(name = "Role")
     private String role;
+
+    @Column(name = "RefreshToken")
+    private String refreshToken;
 
     public Account() {}
 
@@ -99,5 +109,13 @@ public class Account implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

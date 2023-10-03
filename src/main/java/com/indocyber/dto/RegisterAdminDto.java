@@ -62,4 +62,14 @@ public class RegisterAdminDto {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "RegisterAdminDto{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirmation='" + passwordConfirmation + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

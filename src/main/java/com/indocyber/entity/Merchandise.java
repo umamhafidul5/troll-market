@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * Hero is the main entity we'll be using to . . .
+ * Please see the class for true identity
+ * @author umamhafidul5
+ *
+ */
 @Entity
 @Table(name = "Merchandise")
 public class Merchandise implements Serializable {

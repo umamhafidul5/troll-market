@@ -8,12 +8,15 @@ public class ResponseTokenDTO {
 
     private String token;
 
+    private String refreshToken;
+
     public ResponseTokenDTO() {}
 
-    public ResponseTokenDTO(String username, String role, String token) {
+    public ResponseTokenDTO(String username, String role, String token, String refreshToken) {
         this.username = username;
         this.role = role;
         this.token = token;
+        this.refreshToken = refreshToken;
     }
 
     public String getUsername() {
@@ -38,5 +41,13 @@ public class ResponseTokenDTO {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

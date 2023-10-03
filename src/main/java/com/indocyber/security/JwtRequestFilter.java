@@ -1,5 +1,6 @@
 package com.indocyber.security;
 
+import io.jsonwebtoken.JwtParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,6 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             token = authorizationHeader.replace("Bearer ", "");
 
+
             username = jwtToken.getUsername(token);
         }
 
@@ -55,12 +57,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-            System.out.println("APAKAH VALID: " + jwtToken.validateToken(token, userDetails));
-
         }
 
         filterChain.doFilter(request, response);
-        System.out.println("END");
-
     }
 }

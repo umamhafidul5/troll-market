@@ -10,8 +10,6 @@ public class RequestTokenDTO {
 
     private String subject;
 
-    private String secretKey;
-
     private String audience;
 
     public RequestTokenDTO() {}
@@ -48,13 +46,6 @@ public class RequestTokenDTO {
         this.subject = subject;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
     public String getAudience() {
         return audience;
@@ -71,7 +62,6 @@ public class RequestTokenDTO {
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", subject='" + subject + '\'' +
-                ", secretKey='" + secretKey + '\'' +
                 ", audience='" + audience + '\'' +
                 '}';
     }

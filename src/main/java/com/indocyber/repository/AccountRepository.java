@@ -17,4 +17,6 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     Long count(@Param("username") String username);
 
     List<Account> getAccountsByRole(String role);
+
+    Account getAccountByUsername(String username);
 }

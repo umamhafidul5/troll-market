@@ -22,6 +22,7 @@ public class AdminRestController {
     @PostMapping("/registerAdmin")
     public ResponseEntity<StringDto> addAdmin(@Valid @RequestBody RegisterAdminDto dto,
                                            BindingResult bindingResult) {
+        System.out.println(dto.toString());
         if (bindingResult.hasErrors()) {
             try {
                 return new ResponseEntity<>(new StringDto(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()), HttpStatus.BAD_REQUEST);

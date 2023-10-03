@@ -20,4 +20,6 @@ public interface AccountService {
     List<Account> getAccountsByRole(String role);
 
     void topUp(Account buyer, TopUpDto topUp);
+
+    void saveRefreshToken(String refreshToken);
 }

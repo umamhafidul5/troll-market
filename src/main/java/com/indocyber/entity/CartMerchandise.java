@@ -3,6 +3,12 @@ package com.indocyber.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Hero is the main entity we'll be using to . . .
+ * Please see the class for true identity
+ * @author umamhafidul5
+ *
+ */
 @Entity
 @Table(name = "CartMerchandise")
 public class CartMerchandise implements Serializable {

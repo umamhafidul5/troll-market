@@ -5,6 +5,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Hero is the main entity we'll be using to . . .
+ * Please see the class for true identity
+ * @author umamhafidul5
+ * @Entity Modul
+ */
 @Entity
 @Table(name = "TransactionTroll")
 public class Transaction implements Serializable {

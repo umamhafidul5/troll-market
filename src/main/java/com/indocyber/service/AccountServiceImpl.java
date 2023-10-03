@@ -8,6 +8,7 @@ import com.indocyber.entity.Cart;
 import com.indocyber.repository.AccountRepository;
 import com.indocyber.repository.CartRepository;
 import com.indocyber.security.ApplicationUserDetails;
+import com.indocyber.security.JwtToken;
 import com.indocyber.security.MvcSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +32,14 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
     private final CartRepository cartRepository;
 
+    private final JwtToken jwtToken;
+
+
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, CartRepository cartRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, CartRepository cartRepository, JwtToken jwtToken) {
         this.accountRepository = accountRepository;
         this.cartRepository = cartRepository;
+        this.jwtToken = jwtToken;
     }
 
     @Override
@@ -94,6 +98,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
             tempAccount = accountOptional.get();
         }
 
+        assert tempAccount != null;
         return tempAccount.getRole();
     }
 
@@ -102,7 +107,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
 
         Long totalUser = accountRepository.count(username);
 
-        return totalUser > 0 ? true : false;
+        return totalUser > 0;
 
     }
     @Override
@@ -125,6 +130,14 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
     }
 
     @Override
+    public void saveRefreshToken(String refreshToken) {
+        String username = jwtToken.getUsername(refreshToken);
+        Account account = accountRepository.getAccountByUsername(username);
+        account.setRefreshToken(refreshToken);
+        accountRepository.save(account);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Optional<Account> optionalAccount = accountRepository.findById(username);
@@ -134,6 +147,7 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
             tempAccount = optionalAccount.get();
         }
 
+        assert tempAccount != null;
         return new ApplicationUserDetails(tempAccount);
     }
 }
